@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata minClientVersion="2.8.3">
 		<id>Plugin.CrossFormattedText</id>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<title>CrossFormattedText Plugin for Xamarin and Windows</title>
 		<authors>meilcli</authors>
 		<owners>meilcli</owners>
-		<licenseUrl/>
-		<projectUrl/>
+    <licenseUrl>https://github.com/MeilCli/CrossFormattedText/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/MeilCli/CrossFormattedText</projectUrl>
 		<!--Default Icon, a template can be found:  https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon.png-->
     <!--iconUrl>https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon_nuget.png</iconUrl-->
 
@@ -24,7 +24,7 @@
     </description>
 		<summary>Text Span Portable Class Library</summary>
 		<tags>xamarin, pcl, xam.pcl, plugin, plugin for xamarin, windows phone, winphone, wp8, winrt, android, xamarin.forms, ios, text, formattedtext, span</tags>
-		<dependencies>
+    <!--dependencies>
 			<group targetFramework="net">
 			</group>
 			<group targetFramework="win">
@@ -45,7 +45,7 @@
 			</group>
 			<group targetFramework="dotnet">
 			</group>
-		</dependencies>
+		</dependencies-->
 	</metadata>
 	<files>
 		<!--Core-->

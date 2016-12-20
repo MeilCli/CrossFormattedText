@@ -1,4 +1,5 @@
 # CrossFormattedText
+[![NuGet version](https://badge.fury.io/nu/Plugin.CrossFormattedText.svg)](https://www.nuget.org/packages/Plugin.CrossFormattedText/)  
 -- Now Tested Only Android --
       
 This library rapped some platform span class
