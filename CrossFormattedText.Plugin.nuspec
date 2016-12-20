@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata minClientVersion="2.8.3">
+		<id>Plugin.CrossFormattedText</id>
+		<version>1.0.0</version>
+		<title>CrossFormattedText Plugin for Xamarin and Windows</title>
+		<authors>meilcli</authors>
+		<owners>meilcli</owners>
+		<licenseUrl/>
+		<projectUrl/>
+		<!--Default Icon, a template can be found:  https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon.png-->
+    <!--iconUrl>https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon_nuget.png</iconUrl-->
+
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
+      -- Now Tested Only Android --
+      
+      This library rapped some platform span class
+      Android: SpannableStringBuilder(to ICharSequence
+      iOS: NSMutableAttributedString(to NSAttributedString
+      UWP: Paragraph
+      
+      coming soon(Windows Phone,Windows RT
+    </description>
+		<summary>Text Span Portable Class Library</summary>
+		<tags>xamarin, pcl, xam.pcl, plugin, plugin for xamarin, windows phone, winphone, wp8, winrt, android, xamarin.forms, ios, text, formattedtext, span</tags>
+		<dependencies>
+			<group targetFramework="net">
+			</group>
+			<group targetFramework="win">
+			</group>
+			<group targetFramework="wp">
+			</group>
+			<group targetFramework="wpa">
+			</group>
+			<group targetFramework="MonoAndroid">
+			</group>
+			<group targetFramework="Xamarin.iOS10">
+			</group>
+			<group targetFramework="Xamarin.Mac20">
+			</group>
+			<group targetFramework="portable-net45+win+wpa81+wp80">
+			</group>
+			<group targetFramework="uap">
+			</group>
+			<group targetFramework="dotnet">
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<!--Core-->
+		<file src="Source\Plugin.CrossFormattedText\bin\Release\Plugin.CrossFormattedText.dll" target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText\bin\Release\Plugin.CrossFormattedText.xml" target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.CrossFormattedText.Abstractions.pdb" />		
+		
+		<!--dotnet-->
+		<file src="Source\Plugin.CrossFormattedText\bin\Release\Plugin.CrossFormattedText.dll" target="lib\dotnet\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText\bin\Release\Plugin.CrossFormattedText.xml" target="lib\dotnet\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\dotnet\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\dotnet\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\dotnet\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\dotnet\Plugin.CrossFormattedText.Abstractions.pdb" />
+		
+		<!--Win Phone Silverlight-->
+		<file src="Source\Plugin.CrossFormattedText.WindowsPhone8\bin\Release\Plugin.CrossFormattedText.dll" target="lib\wp8\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.WindowsPhone8\bin\Release\Plugin.CrossFormattedText.xml" target="lib\wp8\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.WindowsPhone8\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\wp8\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\wp8\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\wp8\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\wp8\Plugin.CrossFormattedText.Abstractions.pdb" />
+		
+		<!--Win Phone 81-->
+		<file src="Source\Plugin.CrossFormattedText.WindowsPhone81\bin\Release\Plugin.CrossFormattedText.dll" target="lib\wpa81\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.WindowsPhone81\bin\Release\Plugin.CrossFormattedText.xml" target="lib\wpa81\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.WindowsPhone81\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\wpa81\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\wpa81\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\wpa81\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\wpa81\Plugin.CrossFormattedText.Abstractions.pdb" />
+		
+		<!--WinStore-->
+		<file src="Source\Plugin.CrossFormattedText.WindowsStore\bin\Release\Plugin.CrossFormattedText.dll" target="lib\win8\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.WindowsStore\bin\Release\Plugin.CrossFormattedText.xml" target="lib\win8\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.WindowsStore\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\win8\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\win8\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\win8\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\win8\Plugin.CrossFormattedText.Abstractions.pdb" />
+
+		<!--Xamarin.Android-->
+		<file src="Source\Plugin.CrossFormattedText.Android\bin\Release\Plugin.CrossFormattedText.dll" target="lib\MonoAndroid10\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Android\bin\Release\Plugin.CrossFormattedText.xml" target="lib\MonoAndroid10\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Android\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\MonoAndroid10\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\MonoAndroid10\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\MonoAndroid10\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\MonoAndroid10\Plugin.CrossFormattedText.Abstractions.pdb" />
+
+		<!--Xamarin.iOS-->
+		<file src="Source\Plugin.CrossFormattedText.iOS\bin\iPhone\Release\Plugin.CrossFormattedText.dll" target="lib\Xamarin.iOS10\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.iOS\bin\iPhone\Release\Plugin.CrossFormattedText.xml" target="lib\Xamarin.iOS10\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\Xamarin.iOS10\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\Xamarin.iOS10\Plugin.CrossFormattedText.Abstractions.xml" />
+
+		<!--uap-->
+		<file src="Source\Plugin.CrossFormattedText.UWP\bin\Release\Plugin.CrossFormattedText.dll" target="lib\UAP10\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.UWP\bin\Release\Plugin.CrossFormattedText.xml" target="lib\UAP10\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.UWP\bin\Release\Plugin.CrossFormattedText.pdb" target="lib\UAP10\Plugin.CrossFormattedText.pdb" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\UAP10\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\UAP10\Plugin.CrossFormattedText.Abstractions.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.pdb" target="lib\UAP10\Plugin.CrossFormattedText.Abstractions.pdb" />
+		
+		<!--Xamarin.Mac
+		<file src="Source\Plugin.CrossFormattedText.Mac\bin\iPhone\Release\Plugin.CrossFormattedText.dll" target="lib\Xamarin.Mac20\Plugin.CrossFormattedText.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Mac\bin\iPhone\Release\Plugin.CrossFormattedText.xml" target="lib\Xamarin.Mac20\Plugin.CrossFormattedText.xml" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.dll" target="lib\Xamarin.Mac20\Plugin.CrossFormattedText.Abstractions.dll" />
+		<file src="Source\Plugin.CrossFormattedText.Abstractions\bin\Release\Plugin.CrossFormattedText.Abstractions.xml" target="lib\Xamarin.Mac20\Plugin.CrossFormattedText.Abstractions.xml" />
+        -->
+	</files>
+</package>
