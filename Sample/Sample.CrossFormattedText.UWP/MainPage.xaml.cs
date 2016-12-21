@@ -26,25 +26,10 @@ namespace Sample.CrossFormattedText.UWP {
         public MainPage() {
             this.InitializeComponent();
 
-            var paragraph = CrossCrossFormattedText.Current.Format(SpanText.HelloWorld).Span();
+            var spannableString = CrossCrossFormattedText.Current.Format(SpanText.HelloWorld);
 
-            TextBlock.Inlines.Clear();
-            foreach(var span in paragraph.Inlines) {
-                //TextBlock.Inlines.Add(span);
-            }
-            /*
-            RichTextBlock.Inlines.Clear();
-            foreach(var span in paragraph.Inlines) {
-                if(span is Bold) {
-                    continue;
-                }
-                RichTextBlock.Inlines.Add(span);
-            }*/
-            var pa = new Paragraph();
-            pa.Inlines.Add(new Run { Text = "afaso" });
-            foreach(var span in pa.Inlines) {
-                TextBlock.Inlines.Add(span);
-            }
+            spannableString.SetTo(TextBlock);
+            //spannableString.SetTo(RichTextBlock);
         }
     }
 }
