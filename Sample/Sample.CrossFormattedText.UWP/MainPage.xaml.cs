@@ -27,14 +27,12 @@ namespace Sample.CrossFormattedText.UWP {
             this.InitializeComponent();
 
             var paragraph = CrossCrossFormattedText.Current.Format(SpanText.HelloWorld).Span();
-            /*TextBlock.Inlines.Clear();
+
+            TextBlock.Inlines.Clear();
             foreach(var span in paragraph.Inlines) {
-                if(span is Bold) {
-                    continue;
-                }
-                TextBlock.Inlines.Add(span);
+                //TextBlock.Inlines.Add(span);
             }
-            
+            /*
             RichTextBlock.Inlines.Clear();
             foreach(var span in paragraph.Inlines) {
                 if(span is Bold) {
@@ -42,13 +40,11 @@ namespace Sample.CrossFormattedText.UWP {
                 }
                 RichTextBlock.Inlines.Add(span);
             }*/
-            TextBlock.Inlines.Clear();
-            TextBlock.Inlines.Add(new Run() {
-                Text = "HEEE",
-                Foreground = new SolidColorBrush(Color.FromArgb(255,100,100,100)),
-                FontStyle =Windows.UI.Text.FontStyle.Italic,
-                FontWeight=Windows.UI.Text.FontWeights.Bold
-            });
+            var pa = new Paragraph();
+            pa.Inlines.Add(new Run { Text = "afaso" });
+            foreach(var span in pa.Inlines) {
+                TextBlock.Inlines.Add(span);
+            }
         }
     }
 }

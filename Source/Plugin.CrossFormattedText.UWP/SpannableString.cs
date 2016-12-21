@@ -9,6 +9,6 @@ using Windows.UI.Xaml.Documents;
 namespace Plugin.CrossFormattedText {
     public class SpannableString : ISpannableString{
 
-        public Paragraph Text { get; internal set; }
+        public List<Inline> Text { get; internal set; }
     }
 }

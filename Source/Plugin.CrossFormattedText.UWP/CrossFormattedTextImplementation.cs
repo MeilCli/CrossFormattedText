@@ -12,7 +12,7 @@ namespace Plugin.CrossFormattedText
     public class CrossFormattedTextImplementation : ICrossFormattedText {
 
         public ISpannableString Format(FormattedString formattedString) {
-            var sb = new Paragraph();
+            var sb = new List<Inline>();
 
             foreach(var span in formattedString.Spans) {
                 var run = new Run() {
@@ -34,7 +34,7 @@ namespace Plugin.CrossFormattedText
                     run.FontWeight = FontWeights.Bold;
                     run.FontStyle = FontStyle.Italic;
                 }
-                sb.Inlines.Add(run);
+                sb.Add(run);
             }
 
             return new SpannableString() {

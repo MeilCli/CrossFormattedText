@@ -5,7 +5,7 @@
 This library rapped some platform span class
 - Android: SpannableStringBuilder(to ICharSequence
 - iOS: NSMutableAttributedString(to NSAttributedString
-- UWP: Paragraph
+- UWP: List\<Inline\>
       
 coming soon(Windows Phone,Windows RT
 
