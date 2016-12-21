@@ -127,14 +127,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.Abstractions\Plugin.CrossFormattedText.Abstractions.csproj">
-      <Project>{6edb0588-ffc5-4ef5-8a99-9e241d0f878d}</Project>
-      <Name>Plugin.CrossFormattedText.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.UWP\Plugin.CrossFormattedText.UWP.csproj">
-      <Project>{e34b516d-c0d8-450f-9db0-bb6a5b04aef1}</Project>
-      <Name>Plugin.CrossFormattedText.UWP</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sample.CrossFormattedText\Sample.CrossFormattedText.csproj">
       <Project>{78d097d1-7582-4490-a305-f7039f4e152d}</Project>
       <Name>Sample.CrossFormattedText</Name>

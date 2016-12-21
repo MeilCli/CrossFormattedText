@@ -18,7 +18,6 @@ namespace Plugin.CrossFormattedText
                 var run = new Run() {
                     Text = span.Text
                 };
-                Bold bold = null;
                 if(span.ForegroundColor != null) {
                     run.Foreground = new SolidColorBrush(toColor(span.ForegroundColor));
                 }
@@ -26,23 +25,16 @@ namespace Plugin.CrossFormattedText
                     // not find method
                 }
                 if(span.FontAttributes == FontAttributes.Bold) {
-                    bold = new Bold();
-                    bold.Inlines.Add(run);
+                    run.FontWeight = FontWeights.Bold;
                 }
                 if(span.FontAttributes == FontAttributes.Italic) {
                     run.FontStyle = FontStyle.Italic;
                 }
                 if(span.FontAttributes == (FontAttributes.Bold | FontAttributes.Italic)) {
-                    bold = new Bold();
-                    bold.Inlines.Add(run);
-                    bold.FontStyle = FontStyle.Italic;
+                    run.FontWeight = FontWeights.Bold;
+                    run.FontStyle = FontStyle.Italic;
                 }
-                if(bold == null) {
-                    sb.Inlines.Add(run);
-                }else {
-                    sb.Inlines.Add(bold);
-                }
-                
+                sb.Inlines.Add(run);
             }
 
             return new SpannableString() {

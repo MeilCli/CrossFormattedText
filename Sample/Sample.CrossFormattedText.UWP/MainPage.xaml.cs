@@ -12,19 +12,43 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Plugin.CrossFormattedText;
+using Windows.UI.Xaml.Documents;
+using Windows.UI;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 を参照してください
 
-namespace Sample.CrossFormattedText.UWP
-{
+namespace Sample.CrossFormattedText.UWP {
     /// <summary>
     /// それ自体で使用できる空白ページまたはフレーム内に移動できる空白ページ。
     /// </summary>
-    public sealed partial class MainPage : Page
-    {
-        public MainPage()
-        {
+    public sealed partial class MainPage : Page {
+        public MainPage() {
             this.InitializeComponent();
+
+            var paragraph = CrossCrossFormattedText.Current.Format(SpanText.HelloWorld).Span();
+            /*TextBlock.Inlines.Clear();
+            foreach(var span in paragraph.Inlines) {
+                if(span is Bold) {
+                    continue;
+                }
+                TextBlock.Inlines.Add(span);
+            }
+            
+            RichTextBlock.Inlines.Clear();
+            foreach(var span in paragraph.Inlines) {
+                if(span is Bold) {
+                    continue;
+                }
+                RichTextBlock.Inlines.Add(span);
+            }*/
+            TextBlock.Inlines.Clear();
+            TextBlock.Inlines.Add(new Run() {
+                Text = "HEEE",
+                Foreground = new SolidColorBrush(Color.FromArgb(255,100,100,100)),
+                FontStyle =Windows.UI.Text.FontStyle.Italic,
+                FontWeight=Windows.UI.Text.FontWeights.Bold
+            });
         }
     }
 }
