@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata minClientVersion="2.8.3">
 		<id>Plugin.CrossFormattedText</id>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<title>CrossFormattedText Plugin for Xamarin and Windows</title>
 		<authors>meilcli</authors>
 		<owners>meilcli</owners>
@@ -13,7 +13,7 @@
 
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
-      -- Now Tested Only Android --
+      -- Now Tested Only Android (coming soon UWP test)--
       
       This library rapped some platform span class
       Android: SpannableStringBuilder(to ICharSequence
