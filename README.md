@@ -1,6 +1,6 @@
 # CrossFormattedText
 [![NuGet version](https://badge.fury.io/nu/Plugin.CrossFormattedText.svg)](https://www.nuget.org/packages/Plugin.CrossFormattedText/)  
--- Now Tested Only Android (now testing UWP)--
+-- Now Tested Only Android and UWP--
       
 This library rapped some platform span class
 - Android: SpannableStringBuilder(to ICharSequence

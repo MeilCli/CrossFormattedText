@@ -13,7 +13,7 @@
 
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
-      -- Now Tested Only Android (coming soon UWP test)--
+      -- Now Tested Only Android and UWP--
       
       This library rapped some platform span class
       Android: SpannableStringBuilder(to ICharSequence
