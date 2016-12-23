@@ -14,13 +14,15 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
       -- Now Tested Only Android and UWP--
-      
+
       This library rapped some platform span class
       Android: SpannableStringBuilder(to ICharSequence
       iOS: NSMutableAttributedString(to NSAttributedString
       UWP: List of Inline
-      
-      coming soon(Windows Phone,Windows RT
+      Windows Phone 8: List of Inline
+      Windows Phone 8.1: List of Inline
+      Windows 8.1: List of Inline
+
     </description>
 		<summary>Text Span Portable Class Library</summary>
 		<tags>xamarin, pcl, xam.pcl, plugin, plugin for xamarin, windows phone, winphone, wp8, winrt, android, xamarin.forms, ios, text, formattedtext, span</tags>

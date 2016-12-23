@@ -6,11 +6,12 @@ This library rapped some platform span class
 - Android: SpannableStringBuilder(to ICharSequence
 - iOS: NSMutableAttributedString(to NSAttributedString
 - UWP: List\<Inline\>
-      
-coming soon(Windows Phone,Windows RT
+- Windows Phone 8: List\<Inline\>
+- Windows Phone 8.1: List\<Inline\>
+- Windows 8.1: List\<Inline\>
 
 ## Attension
-UWP not support background color(I don`t find method)
+All Windows Platform not support background color(I don`t find method)
 
 ## Usgae
 
