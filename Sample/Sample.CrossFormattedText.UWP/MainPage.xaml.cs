@@ -29,7 +29,6 @@ namespace Sample.CrossFormattedText.UWP {
             var spannableString = CrossCrossFormattedText.Current.Format(SpanText.HelloWorld);
 
             spannableString.SetTo(TextBlock);
-            //spannableString.SetTo(RichTextBlock);
         }
     }
 }
