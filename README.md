@@ -1,6 +1,6 @@
 # CrossFormattedText
 [![NuGet version](https://badge.fury.io/nu/Plugin.CrossFormattedText.svg)](https://www.nuget.org/packages/Plugin.CrossFormattedText/)  
--- Now Tested Only Android and UWP--
+-- Now Not Testing iOS--
       
 This library rapped some platform span class
 - Android: SpannableStringBuilder(to ICharSequence
@@ -49,12 +49,12 @@ In target Platform: put spanned string
 ```csharp
 //for Android
 textView.TextFormatted = spannableString.Span();
-//for UWP
+//for All Windows Platform
 spannableString.SetTo(TextBlock);
 ```
 
 Span Method is only cast ISpannableString→each platform`s SpannableString and take Text field  
-SetTo Method is for UWP, auto clear and add all span to TextBlock-Text.
+SetTo Method is for All Windows Platform, auto clear and add all span to TextBlock-Text.
 
 ## License
 under MIT License
