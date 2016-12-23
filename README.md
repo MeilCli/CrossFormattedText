@@ -10,13 +10,22 @@ This library rapped some platform span class
 - Windows Phone 8.1: List\<Inline\>
 - Windows 8.1: List\<Inline\>
 
-## Attension
-All Windows Platform not support background color(I don`t find method)
+## Features
+
+| Platform | Supported | BackgroundColor | ForegroundColor | Bold/Italic | RelativeFontSize |
+|:---|:---:|:---:|:---:|:--:|:--:|
+| Android | Yes | ✓ | ✓ | ✓ | ✓ |
+| iOS | Yes(no test) | ✓ | ✓ | ✓ | |
+| UWP | Yes | | ✓ | ✓ | ✓ |
+| Windows Phone 8| Yes | | ✓ | ✓ | ✓ |
+| Windows Phone 8.1| Yes | | ✓ | ✓ | ✓ |
+| Windows 8.1| Yes | | ✓ | ✓ | ✓ |
+| Mac | No | | | | |
 
 ## Usgae
 
 In PCL: prepare FormattedString
-```
+```csharp
 FormattedString HelloWorld = new FormattedString() {
   Spans = new List<Span>() {
     new Span() {
@@ -32,12 +41,12 @@ FormattedString HelloWorld = new FormattedString() {
 ```
 
 In PCL or target Platform: make ISpaanableString
-```
+```csharp
 ISpannableString spannableString = CrossCrossFormattedText.Current.Format(HelloWorld);
 ```
 
 In target Platform: put spanned string
-```
+```csharp
 //for Android
 textView.TextFormatted = spannableString.Span();
 //for UWP
