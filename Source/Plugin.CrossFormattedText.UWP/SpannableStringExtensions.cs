@@ -24,11 +24,5 @@ namespace Plugin.CrossFormattedText {
             }
         }
 
-        public static void SetTo(this ISpannableString spannableString,Paragraph paragraph) {
-            paragraph.Inlines.Clear();
-            foreach(var span in spannableString.Span()) {
-                paragraph.Inlines.Add(span);
-            }
-        }
     }
 }
