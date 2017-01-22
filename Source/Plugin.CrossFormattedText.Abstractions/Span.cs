@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Plugin.CrossFormattedText.Abstractions {
     public class Span {
@@ -16,6 +17,14 @@ namespace Plugin.CrossFormattedText.Abstractions {
         public FontAttributes FontAttributes { get; set; } = FontAttributes.None;
 
         public FontSize FontSize { get; set; }
+
+        public ICommand Command { get; set; }
+
+        /// <summary>
+        /// If use Command, require this
+        /// </summary>
+        public object CommandParameter { get; set; }
+
     }
 
     public class SpanColor {

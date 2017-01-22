@@ -5,10 +5,16 @@ using Windows.UI.Xaml.Documents;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Text;
+using Windows.UI.Xaml;
+using System.Windows.Input;
 
 namespace Plugin.CrossFormattedText {
 
     public class CrossFormattedTextImplementation : ICrossFormattedText {
+
+        private static readonly DependencyProperty commandProperty = DependencyProperty.Register("Command",typeof(ICommand),typeof(Hyperlink),new PropertyMetadata(null));
+        private static readonly DependencyProperty commandParameterProperty = DependencyProperty.Register("CommandParameter",typeof(object),typeof(Hyperlink),new PropertyMetadata(null));
+
         public ISpannableString Format(FormattedString formattedString) {
             var sb = new List<Inline>();
 
@@ -35,6 +41,16 @@ namespace Plugin.CrossFormattedText {
                     run.FontWeight = FontWeights.Bold;
                     run.FontStyle = FontStyle.Italic;
                 }
+
+                if(span.Command != null && span.CommandParameter != null) {
+                    var link = new Hyperlink();
+                    link.Inlines.Add(run);
+                    link.Click += hyperLinkClicked;
+                    link.SetValue(commandProperty,span.Command);
+                    link.SetValue(commandParameterProperty,span.CommandParameter);
+                    sb.Add(link);
+                    continue;
+                }
                 sb.Add(run);
             }
 
@@ -46,6 +62,11 @@ namespace Plugin.CrossFormattedText {
 
         private Color toColor(SpanColor spanColor) {
             return Color.FromArgb((byte)spanColor.Alpha,(byte)spanColor.Red,(byte)spanColor.Green,(byte)spanColor.Blue);
+        }
+
+        private static void hyperLinkClicked(object sender,HyperlinkClickEventArgs args) {
+            var command = (sender as Hyperlink).GetValue(commandProperty) as ICommand;
+            command.Execute((sender as Hyperlink).GetValue(commandParameterProperty));
         }
     }
 }

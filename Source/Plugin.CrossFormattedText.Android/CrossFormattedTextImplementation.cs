@@ -61,6 +61,14 @@ namespace Plugin.CrossFormattedText {
                         Android.Text.SpanTypes.ExclusiveExclusive
                     );
                 }
+                if(span.Command != null && span.CommandParameter != null) {
+                    sb.SetSpan(
+                        new CommandableSpan(span.Command,span.CommandParameter),
+                        startIndex,
+                        endIndex,
+                        Android.Text.SpanTypes.ExclusiveExclusive
+                    );
+                }
 
                 startIndex = endIndex;
             }

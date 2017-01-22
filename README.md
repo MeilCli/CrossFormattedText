@@ -1,6 +1,5 @@
 # CrossFormattedText
 [![NuGet version](https://badge.fury.io/nu/Plugin.CrossFormattedText.svg)](https://www.nuget.org/packages/Plugin.CrossFormattedText/)  
--- Now Not Testing iOS--
       
 This library rapped some platform span class
 - Android: SpannableStringBuilder(to ICharSequence
@@ -12,15 +11,15 @@ This library rapped some platform span class
 
 ## Features
 
-| Platform | Supported | BackgroundColor | ForegroundColor | Bold/Italic | RelativeFontSize |
-|:---|:---:|:---:|:---:|:--:|:--:|
-| Android | Yes | ✓ | ✓ | ✓ | ✓ |
-| iOS | Yes(no test) | ✓ | ✓ | ✓ | |
-| UWP | Yes | | ✓ | ✓ | ✓ |
-| Windows Phone 8| Yes | | ✓ | ✓ | ✓ |
-| Windows Phone 8.1| Yes | | ✓ | ✓ | ✓ |
-| Windows 8.1| Yes | | ✓ | ✓ | ✓ |
-| Mac | No | | | | |
+| Platform | Supported | BackgroundColor | ForegroundColor | Bold/Italic | RelativeFontSize | Command |
+|:---|:---:|:---:|:---:|:--:|:--:|:--:|
+| Android | Yes | ✓ | ✓ | ✓ | ✓ | ✓ |
+| iOS | Yes | ✓ | ✓ | ✓ | | will support(please advice) |
+| UWP | Yes | | ✓ | ✓ | ✓ | ✓ |
+| Windows Phone 8| Yes | | ✓ | ✓ | ✓ | |
+| Windows Phone 8.1| Yes | | ✓ | ✓ | ✓ | ✓ |
+| Windows 8.1| Yes | | ✓ | ✓ | ✓ | ✓ |
+| Mac | No | | | | | |
 
 ## Usgae
 
@@ -49,6 +48,9 @@ In target Platform: put spanned string
 ```csharp
 //for Android
 textView.TextFormatted = spannableString.Span();
+textView.SetTextWithCommandableSpan(spannableString); // for using Command
+//for iOS
+Label.AttributedText = spannableString.Span();
 //for All Windows Platform
 spannableString.SetTo(TextBlock);
 ```

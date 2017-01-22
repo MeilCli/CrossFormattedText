@@ -1,7 +1,9 @@
 using Plugin.CrossFormattedText.Abstractions;
 using System;
-using System.Windows.Documents;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
+using System.Windows.Input;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows;
 
@@ -35,6 +37,7 @@ namespace Plugin.CrossFormattedText {
                     run.FontWeight = FontWeights.Bold;
                     run.FontStyle = FontStyles.Italic;
                 }
+
                 sb.Add(run);
             }
 
@@ -46,5 +49,6 @@ namespace Plugin.CrossFormattedText {
         private Color toColor(SpanColor spanColor) {
             return Color.FromArgb((byte)spanColor.Alpha,(byte)spanColor.Red,(byte)spanColor.Green,(byte)spanColor.Blue);
         }
+
     }
 }

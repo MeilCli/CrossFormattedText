@@ -48,11 +48,14 @@
     <Compile Include="..\Plugin.CrossFormattedText\CrossCrossFormattedText.cs">
       <Link>CrossCrossFormattedText.cs</Link>
     </Compile>
+    <Compile Include="CommandableSpan.cs" />
     <Compile Include="CrossFormattedTextImplementation.cs" />
+    <Compile Include="ExtendedLinkMovementMethod.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpannableString.cs" />
     <Compile Include="SpannableStringExtensions.cs" />
+    <Compile Include="TextViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

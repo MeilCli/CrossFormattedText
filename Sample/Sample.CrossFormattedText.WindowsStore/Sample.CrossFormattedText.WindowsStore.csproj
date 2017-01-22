@@ -114,7 +114,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
     <None Include="Sample.CrossFormattedText.WindowsStore_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -134,16 +133,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Plugin.CrossFormattedText, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Plugin.CrossFormattedText.1.0.4\lib\win8\Plugin.CrossFormattedText.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Plugin.CrossFormattedText.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Plugin.CrossFormattedText.1.0.4\lib\win8\Plugin.CrossFormattedText.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.Abstractions\Plugin.CrossFormattedText.Abstractions.csproj">
+      <Project>{6edb0588-ffc5-4ef5-8a99-9e241d0f878d}</Project>
+      <Name>Plugin.CrossFormattedText.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.WindowsStore\Plugin.CrossFormattedText.WindowsStore.csproj">
+      <Project>{ed9a4ca1-c04c-457d-9a2e-7995ccf12356}</Project>
+      <Name>Plugin.CrossFormattedText.WindowsStore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sample.CrossFormattedText\Sample.CrossFormattedText.csproj">
       <Project>{78d097d1-7582-4490-a305-f7039f4e152d}</Project>
       <Name>Sample.CrossFormattedText</Name>

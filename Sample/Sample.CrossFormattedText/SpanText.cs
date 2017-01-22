@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using Plugin.CrossFormattedText.Abstractions;
 
 namespace Sample.CrossFormattedText {
@@ -16,8 +17,26 @@ namespace Sample.CrossFormattedText {
                 new Span() {
                     Text = "World",
                     FontAttributes = FontAttributes.Bold | FontAttributes.Italic
+                },
+                new Span() {
+                    Text = "Clickable!",
+                    ForegroundColor = new SpanColor(60,90,170),
+                    Command = new DebugCommand(),
+                    CommandParameter = "Clicked",
                 }
             }
         };
+    }
+
+    class DebugCommand : ICommand {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter) {
+            return true;
+        }
+
+        public void Execute(object parameter) {
+            System.Diagnostics.Debug.WriteLine(parameter);
+        }
     }
 }

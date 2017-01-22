@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Plugin.CrossFormattedText.Abstractions;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
+using Windows.UI.Xaml.Input;
 
 namespace Plugin.CrossFormattedText {
     public static class SpannableStringExtensions {
@@ -25,4 +28,5 @@ namespace Plugin.CrossFormattedText {
         }
 
     }
+
 }

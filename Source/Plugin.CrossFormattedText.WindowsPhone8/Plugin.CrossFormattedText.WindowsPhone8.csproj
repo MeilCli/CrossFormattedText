@@ -99,6 +99,11 @@
       <Name>Plugin.CrossFormattedText.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Windows.Foundation.UniversalApiContract">
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\References\Windows.Foundation.UniversalApiContract\2.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />

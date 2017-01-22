@@ -37,7 +37,7 @@
     <EnableLLVM>False</EnableLLVM>
     <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
     <EnableProguard>False</EnableProguard>
-    <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,14 +54,6 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
-    <Reference Include="Plugin.CrossFormattedText, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Plugin.CrossFormattedText.1.0.4\lib\MonoAndroid10\Plugin.CrossFormattedText.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Plugin.CrossFormattedText.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Plugin.CrossFormattedText.1.0.4\lib\MonoAndroid10\Plugin.CrossFormattedText.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
-    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
@@ -93,6 +84,14 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.Abstractions\Plugin.CrossFormattedText.Abstractions.csproj">
+      <Project>{6edb0588-ffc5-4ef5-8a99-9e241d0f878d}</Project>
+      <Name>Plugin.CrossFormattedText.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.Android\Plugin.CrossFormattedText.Android.csproj">
+      <Project>{56a56f17-7de1-4ca1-9617-bf32e971ac84}</Project>
+      <Name>Plugin.CrossFormattedText.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sample.CrossFormattedText\Sample.CrossFormattedText.csproj">
       <Project>{78d097d1-7582-4490-a305-f7039f4e152d}</Project>
       <Name>Sample.CrossFormattedText</Name>
