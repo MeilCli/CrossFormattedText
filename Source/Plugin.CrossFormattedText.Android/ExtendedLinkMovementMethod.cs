@@ -25,6 +25,8 @@ namespace Plugin.CrossFormattedText {
             }
         }
 
+        private CommandableSpan currentSpan;
+
         public override bool OnTouchEvent(TextView widget,ISpannable buffer,MotionEvent e) {
             var action = e.Action;
 
@@ -40,17 +42,23 @@ namespace Plugin.CrossFormattedText {
                 if(span != null) {
                     if(action == MotionEventActions.Up) {
                         span.OnClick(widget);
-                        Selection.RemoveSelection(buffer);
+                        span.IsHighlight = false;
                     } else if(action == MotionEventActions.Down) {
-                        Selection.SetSelection(buffer,buffer.GetSpanStart(span),buffer.GetSpanEnd(span));
+                        span.IsHighlight = true;
                     }
+                    widget.Invalidate();
+                    currentSpan = span;
                     return true;
                 } else {
-                    Selection.RemoveSelection(buffer);
+                    if(currentSpan != null) {
+                        currentSpan.IsHighlight = false;
+                        currentSpan = null;
+                        widget.Invalidate();
+                    }
                 }
             }
-
-            return base.OnTouchEvent(widget,buffer,e);
+            base.OnTouchEvent(widget,buffer,e);
+            return false;
         }
 
     }

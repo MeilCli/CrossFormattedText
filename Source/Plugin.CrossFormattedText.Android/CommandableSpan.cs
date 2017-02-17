@@ -25,6 +25,9 @@ namespace Plugin.CrossFormattedText {
         }
 
         public override void UpdateDrawState(TextPaint ds) {
+            if(IsHighlight) {
+                ds.BgColor = Color.ParseColor("#ff33b5e5");
+            }
         }
     }
 }

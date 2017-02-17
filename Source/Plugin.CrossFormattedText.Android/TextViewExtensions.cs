@@ -16,8 +16,13 @@ namespace Plugin.CrossFormattedText {
     public static class TextViewExtensions {
 
         public static void SetTextWithCommandableSpan(this TextView textView,ISpannableString spanableString) {
-            textView.MovementMethod =ExtendedLinkMovementMethod.Instance;
+            textView.MovementMethod = ExtendedLinkMovementMethod.Instance;
             textView.TextFormatted = spanableString.Span();
+            textView.Clickable = false;
+            textView.LongClickable = false;
+            if(Build.VERSION.SdkInt >= BuildVersionCodes.M) {
+                textView.ContextClickable = false;
+            }
         }
     }
 }
