@@ -29,8 +29,8 @@ namespace Plugin.CrossFormattedText {
             var action = e.Action;
 
             if(action == MotionEventActions.Up || action == MotionEventActions.Down) {
-                int x = (int)e.XPrecision - widget.TotalPaddingLeft + widget.ScrollX;
-                int y = (int)e.YPrecision - widget.TotalPaddingTop + widget.ScrollY;
+                int x = (int)e.GetX() - widget.TotalPaddingLeft + widget.ScrollX;
+                int y = (int)e.GetY() - widget.TotalPaddingTop + widget.ScrollY;
                 var layout = widget.Layout;
                 int line = layout.GetLineForVertical(y);
                 int off = layout.GetOffsetForHorizontal(line,x);
