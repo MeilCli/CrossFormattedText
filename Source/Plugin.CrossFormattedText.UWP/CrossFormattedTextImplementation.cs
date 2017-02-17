@@ -66,7 +66,11 @@ namespace Plugin.CrossFormattedText {
 
         private static void hyperLinkClicked(object sender,HyperlinkClickEventArgs args) {
             var command = (sender as Hyperlink).GetValue(commandProperty) as ICommand;
-            command.Execute((sender as Hyperlink).GetValue(commandParameterProperty));
+            var parameter = (sender as Hyperlink).GetValue(commandParameterProperty);
+            if(command.CanExecute(parameter) == false) {
+                return;
+            }
+            command.Execute(parameter);
         }
     }
 }

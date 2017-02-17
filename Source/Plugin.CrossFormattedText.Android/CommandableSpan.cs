@@ -18,6 +18,9 @@ namespace Plugin.CrossFormattedText {
         }
 
         public override void OnClick(View widget) {
+            if(command.CanExecute(commandParameter) == false) {
+                return;
+            }
             command.Execute(commandParameter);
         }
 
