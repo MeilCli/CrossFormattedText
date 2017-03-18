@@ -16,7 +16,8 @@ namespace Sample.CrossFormattedText {
                 },
                 new Span() {
                     Text = "World",
-                    FontAttributes = FontAttributes.Bold | FontAttributes.Italic
+                    FontAttributes = FontAttributes.Bold | FontAttributes.Italic,
+                    FontSize = FontSize.Small
                 },
                 new Span() {
                     Text = "Clickable!",
