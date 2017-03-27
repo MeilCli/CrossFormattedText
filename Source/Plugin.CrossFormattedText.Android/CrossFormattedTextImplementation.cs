@@ -31,7 +31,7 @@ namespace Plugin.CrossFormattedText {
                         Android.Text.SpanTypes.ExclusiveExclusive
                     );
                 }
-                if(span.FontSize.Proportion != 1f) {
+                if(span.FontSize != FontSize.Normal) {
                     sb.SetSpan(
                         new Android.Text.Style.RelativeSizeSpan(span.FontSize.Proportion),
                         startIndex,

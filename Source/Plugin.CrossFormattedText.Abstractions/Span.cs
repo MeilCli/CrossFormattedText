@@ -55,7 +55,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
             if(FontAttributes != span.FontAttributes) {
                 return false;
             }
-            if(FontSize.Proportion != span.FontSize.Proportion) {
+            if(FontSize != span.FontSize) {
                 return false;
             }
             if(Command != span.Command) {
@@ -72,7 +72,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
             hash ^= BackgroundColor.GetHashCode();
             hash ^= ForegroundColor.GetHashCode();
             hash ^= FontAttributes.GetHashCode();
-            hash ^= FontSize.Proportion.GetHashCode();
+            hash ^= FontSize.GetHashCode();
             hash ^= Command?.GetHashCode() ?? -1;
             hash ^= CommandParameter?.GetHashCode() ?? -1;
             return hash;
