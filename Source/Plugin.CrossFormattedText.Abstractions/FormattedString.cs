@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Plugin.CrossFormattedText.Abstractions {
 
-    public class FormattedString : IEnumerable<Span>{
+    public class FormattedString : IEnumerable<Span> {
 
         public static readonly FormattedString Empty = new FormattedString();
 
@@ -51,7 +51,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
             if(value.Length == 0) {
                 return true;
             }
-           
+
             char[] vAr = value.ToCharArray();
             CharSpan[] sAr = ToCharSpanArray();
 
@@ -92,6 +92,48 @@ namespace Plugin.CrossFormattedText.Abstractions {
                 }
             }
             return false;
+        }
+
+        public bool EndsWith(string value) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if(value.Length == 0) {
+                return true;
+            }
+
+            char[] vAr = value.ToCharArray();
+            CharSpan[] sAr = ToCharSpanArray();
+
+            if(vAr.Length > sAr.Length) {
+                return false;
+            }
+
+            for(int i = vAr.Length - 1, j = sAr.Length - 1;i >= 0;i--, j--) {
+                if(vAr[i] != sAr[j].Character) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool EndsWith(Span value) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if(spans.Length == 0) {
+                return false;
+            }
+
+            return spans[spans.Length - 1].Equals(value);
+        }
+
+        public string ToPlainText() {
+            var sb = new StringBuilder();
+            foreach(var span in spans) {
+                sb.Append(span.Text);
+            }
+            return sb.ToString();
         }
 
         public IEnumerator<Span> GetEnumerator() {
