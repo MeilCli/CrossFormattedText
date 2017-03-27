@@ -55,6 +55,7 @@
     <Compile Include="FontSizeTest.cs" />
     <Compile Include="SpanColorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpanTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.Abstractions\Plugin.CrossFormattedText.Abstractions.csproj">

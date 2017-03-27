@@ -26,6 +26,25 @@ namespace Plugin.CrossFormattedText.Abstractions {
         /// </summary>
         public object CommandParameter { get; set; }
 
+        /// <summary>
+        /// shallow copy
+        /// </summary>
+        /// <returns>copied instance</returns>
+        public Span Clone() {
+            // Because of shallow copy
+            // - PCL has not reference ICloneable
+            // - some Clone method is not fixed to shallow or deep copy
+            var span = new Span();
+            span.Text = Text; // string is Immutable
+            span.BackgroundColor = BackgroundColor;
+            span.ForegroundColor = ForegroundColor;
+            span.FontAttributes = FontAttributes;
+            span.FontSize = FontSize;
+            span.Command = Command;
+            span.CommandParameter = CommandParameter;
+            return span;
+        }
+
         public override bool Equals(object obj) {
             if(obj == null) {
                 return false;
