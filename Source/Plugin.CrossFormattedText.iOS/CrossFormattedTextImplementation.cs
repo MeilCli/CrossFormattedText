@@ -15,10 +15,10 @@ namespace Plugin.CrossFormattedText {
                     continue;
                 }
                 var ui = new UIStringAttributes();
-                if(span.ForegroundColor != null) {
+                if(span.ForegroundColor != SpanColor.DefaultValue) {
                     ui.ForegroundColor = toColor(span.ForegroundColor);
                 }
-                if(span.BackgroundColor != null) {
+                if(span.BackgroundColor != SpanColor.DefaultValue) {
                     ui.BackgroundColor = toColor(span.BackgroundColor);
                 }
                 if(span.FontAttributes == FontAttributes.Bold) {

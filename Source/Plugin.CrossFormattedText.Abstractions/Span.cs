@@ -11,9 +11,9 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
         public string Text { get; set; } = string.Empty;
 
-        public SpanColor BackgroundColor { get; set; }
+        public SpanColor BackgroundColor { get; set; } = SpanColor.DefaultValue;
 
-        public SpanColor ForegroundColor { get; set; }
+        public SpanColor ForegroundColor { get; set; } = SpanColor.DefaultValue;
 
         public FontAttributes FontAttributes { get; set; } = FontAttributes.None;
 
@@ -28,7 +28,10 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
     }
 
-    public class SpanColor {
+    public struct SpanColor : IEquatable<SpanColor>{
+
+        public static readonly SpanColor DefaultValue = new SpanColor(-1,-1,-1,-1);
+
         public int Alpha { get; }
         public int Red { get; }
         public int Green { get; }
@@ -41,6 +44,29 @@ namespace Plugin.CrossFormattedText.Abstractions {
             Red = red;
             Green = green;
             Blue = blue;
+        }
+
+        public override bool Equals(object obj) {
+            if(obj is SpanColor) {
+                return Equals((SpanColor)obj);
+            }
+            return false;
+        }
+
+        public bool Equals(SpanColor color) {
+            return Alpha == color.Alpha && Red == color.Red && Green == color.Green && Blue == color.Blue;
+        }
+
+        public override int GetHashCode() {
+            return Alpha ^ Red ^ Green ^ Blue;
+        }
+
+        public static bool operator ==(SpanColor a,SpanColor b) {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(SpanColor a,SpanColor b) {
+            return (a == b) == false;
         }
     }
 

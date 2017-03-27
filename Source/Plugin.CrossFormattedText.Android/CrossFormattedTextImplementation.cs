@@ -15,7 +15,7 @@ namespace Plugin.CrossFormattedText {
                 sb.Append(span.Text);
                 endIndex = startIndex + span.Text.Length;
 
-                if(span.ForegroundColor != null) {
+                if(span.ForegroundColor != SpanColor.DefaultValue) {
                     sb.SetSpan(
                         new Android.Text.Style.ForegroundColorSpan(toColor(span.ForegroundColor)),
                         startIndex,
@@ -23,7 +23,7 @@ namespace Plugin.CrossFormattedText {
                         Android.Text.SpanTypes.ExclusiveExclusive
                     );
                 }
-                if(span.BackgroundColor != null) {
+                if(span.BackgroundColor != SpanColor.DefaultValue) {
                     sb.SetSpan(
                         new Android.Text.Style.BackgroundColorSpan(toColor(span.ForegroundColor)),
                         startIndex,

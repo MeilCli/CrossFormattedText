@@ -35,14 +35,16 @@
     <DocumentationFile>bin\Release\Plugin.CrossFormattedText.Abstractions.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="FormattedString.cs" />
     <Compile Include="ICrossFormattedText.cs" />
     <Compile Include="ISpannableString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Span.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v7.0\Mono.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,10 +22,10 @@ namespace Plugin.CrossFormattedText {
                 var run = new Run() {
                     Text = span.Text
                 };
-                if(span.ForegroundColor != null) {
+                if(span.ForegroundColor != SpanColor.DefaultValue) {
                     run.Foreground = new SolidColorBrush(toColor(span.ForegroundColor));
                 }
-                if(span.BackgroundColor != null) {
+                if(span.BackgroundColor != SpanColor.DefaultValue) {
                     // not find method
                 }
                 if(span.FontSize.Proportion != 1f) {
