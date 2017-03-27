@@ -64,7 +64,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
                 return false;
             }
 
-            // vAr.Length >= 1
+            if(vAr.Length > sAr.Length) {
+                return false;
+            }
+
+            // vAr.Length >= 1 && vAr.Length <= sAr.Length
             for(int i = 0;i < sAr.Length;i++) {
                 if(sAr[i].Character != vAr[0]) {
                     continue;
