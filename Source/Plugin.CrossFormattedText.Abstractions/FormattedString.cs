@@ -17,7 +17,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
             spans = new Span[0];
         }
 
-        public FormattedString(Span[] spans) {
+        public FormattedString(IEnumerable<Span> spans) {
+            this.spans = spans.Select(x => x.Clone()).ToArray();
+        }
+
+        internal FormattedString(Span[] spans) {
             this.spans = spans;
         }
 
@@ -30,18 +34,26 @@ namespace Plugin.CrossFormattedText.Abstractions {
             }
         }
 
-        public int Length {
+        public int Length => spans.Length;
+
+        private int? _textLength;
+        public int TextLength {
             get {
+                if(_textLength != null) {
+                    return _textLength.Value;
+                }
+
                 int size = 0;
                 foreach(var span in spans) {
                     size += span.Text.Length;
                 }
-                return size;
+                _textLength = size;
+                return _textLength.Value;
             }
         }
 
         internal CharSpan[] ToCharSpanArray() {
-            var ar = new CharSpan[Length];
+            var ar = new CharSpan[TextLength];
             int index = 0;
             for(int i = 0;i < spans.Length;i++) {
                 Span span = spans[i];
@@ -51,6 +63,35 @@ namespace Plugin.CrossFormattedText.Abstractions {
                 }
             }
             return ar;
+        }
+
+        internal FormattedString MergeCharSpan(CharSpan[] newSpans) {
+            var list = new List<Span>();
+            int? currentSpanNumber = null;
+            Span currentSpan = null;
+            var sb = new StringBuilder();
+            for(int i = 0;i < newSpans.Length;i++) {
+                CharSpan c = newSpans[i];
+                if(currentSpanNumber != null && currentSpanNumber != c.SpanNumber) {
+                    Span span = currentSpan.Clone();
+                    span.Text = sb.ToString();
+                    sb.Clear();
+                    currentSpanNumber = null;
+                    currentSpan = null;
+                    list.Add(span);
+                }
+                if(currentSpan == null) {
+                    currentSpan = c.Span ?? spans[c.SpanNumber];
+                }
+                currentSpanNumber = c.SpanNumber;
+                sb.Append(c.Character);
+            }
+            if(currentSpan != null) {
+                Span span = currentSpan.Clone();
+                span.Text = sb.ToString();
+                list.Add(span);
+            }
+            return new FormattedString(list.ToArray());
         }
 
         public bool Contains(string value) {
@@ -146,14 +187,14 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public int IndexOf(char value,int startIndex) {
-            return IndexOf(value,startIndex,Length - startIndex);
+            return IndexOf(value,startIndex,TextLength - startIndex);
         }
 
         public int IndexOf(char value,int startIndex,int count) {
-            if(startIndex < 0 || startIndex >= Length) {
+            if(startIndex < 0 || startIndex >= TextLength) {
                 throw new ArgumentOutOfRangeException(nameof(startIndex));
             }
-            if(count < 0 || count > Length - startIndex) {
+            if(count < 0 || count > TextLength - startIndex) {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
@@ -176,14 +217,14 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public int IndexOf(string value,int startIndex) {
-            return IndexOf(value,startIndex,Length - startIndex);
+            return IndexOf(value,startIndex,TextLength - startIndex);
         }
 
         public int IndexOf(string value,int startIndex,int count) {
-            if(startIndex < 0 || startIndex >= Length) {
+            if(startIndex < 0 || startIndex >= TextLength) {
                 throw new ArgumentOutOfRangeException(nameof(startIndex));
             }
-            if(count < 0 || count > Length - startIndex) {
+            if(count < 0 || count > TextLength - startIndex) {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
             if(value == null) {
@@ -249,6 +290,70 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return -1;
         }
 
+        public FormattedString Insert(int startIndex,string value) {
+            return Insert(startIndex,value,SpanOperand.Right);
+        }
+
+        public FormattedString Insert(int startIndex,string value,SpanOperand operand) {
+            if(startIndex < 0 || startIndex >= TextLength) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if(value.Length == 0) {
+                return this;
+            }
+
+            CharSpan[] sAr = ToCharSpanArray();
+            CharSpan[] nAr = new CharSpan[TextLength + value.Length];
+
+            Span newSpan;
+            int newSpanNumber;
+            if(operand == SpanOperand.Left && startIndex - 1 >= 0) {
+                newSpan = sAr[startIndex - 1].Span;
+                newSpanNumber = sAr[startIndex - 1].SpanNumber;
+            } else {
+                newSpan = sAr[startIndex].Span;
+                newSpanNumber = sAr[startIndex].SpanNumber;
+            }
+            int index = 0;
+            for(int i = 0;i < sAr.Length;i++) {
+                if(i == startIndex) {
+                    foreach(var c in value) {
+                        nAr[index] = new CharSpan(c,newSpan,newSpanNumber);
+                        index++;
+                    }
+                }
+                nAr[index] = sAr[i];
+                index++;
+            }
+
+            return MergeCharSpan(nAr);
+        }
+
+        public FormattedString Insert(int insertIndex,Span value) {
+            if(insertIndex < 0 || insertIndex >= Length) {
+                throw new ArgumentOutOfRangeException(nameof(insertIndex));
+            }
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            Span[] nAr = new Span[spans.Length + 1];
+            int index = 0;
+            for(int i = 0;i < spans.Length;i++) {
+                if(i == insertIndex) {
+                    nAr[index] = value.Clone();
+                    index++;
+                }
+                nAr[index] = spans[i].Clone();
+                index++;
+            }
+
+            return new FormattedString(nAr);
+        }
+
         public string ToPlainText() {
             var sb = new StringBuilder();
             foreach(var span in spans) {
@@ -257,9 +362,21 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return sb.ToString();
         }
 
+        public bool AnySpanReferenceEquals(FormattedString formattedString) {
+            if(spans.Length != formattedString.spans.Length) {
+                throw new InvalidOperationException();
+            }
+            for(int i = 0;i < spans.Length;i++) {
+                if(ReferenceEquals(spans[i],formattedString.spans[i])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public IEnumerator<Span> GetEnumerator() {
             foreach(var span in spans) {
-                yield return span;
+                yield return span.Clone();
             }
         }
 

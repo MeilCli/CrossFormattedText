@@ -78,13 +78,13 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(Text.IndexOf('<'),-1);
             Assert.AreEqual(Text.IndexOf(' ',5,3),7);
             Assert.AreEqual(Text.IndexOf(' ',5,2),-1);
-            Assert.AreEqual(Text.IndexOf('.',Text.Length - 1),Text.Length - 1);
+            Assert.AreEqual(Text.IndexOf('.',Text.TextLength - 1),Text.TextLength - 1);
 
             Assert.AreEqual(Text.IndexOf("T"),0);
             Assert.AreEqual(Text.IndexOf("This "),0);
             Assert.AreEqual(Text.IndexOf("This ",1),21);
-            Assert.AreEqual(Text.IndexOf("text.",Text.Length - 5),Text.Length - 5);
-            Assert.AreEqual(Text.IndexOf("text.",Text.Length - 4),-1);
+            Assert.AreEqual(Text.IndexOf("text.",Text.TextLength - 5),Text.TextLength - 5);
+            Assert.AreEqual(Text.IndexOf("text.",Text.TextLength - 4),-1);
             Assert.AreEqual(Text.IndexOf("That"),-1);
 
             Span span1 = new Span() {
@@ -101,6 +101,31 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(Text.IndexOf(span1,1),-1);
             Assert.AreEqual(Text.IndexOf(span2,0,1),-1);
             Assert.AreEqual(Text.IndexOf(span3),-1);
+        }
+
+        [TestMethod]
+        public void InsertTest() {
+            string s = " That is text.";
+
+            var newText1 = Text.Insert(20,s);
+            var newString1 = Text.ToPlainText().Insert(20,s);
+            var newText2 = Text.Insert(20,s,SpanOperand.Left);
+            var newString2 = Text.ToPlainText().Insert(20,s);
+            Assert.AreEqual(newText1[1].Text.StartsWith(s),true);
+            Assert.AreEqual(newText2[0].Text.EndsWith(s),true);
+            Assert.AreEqual(newText1.Length,Text.Length);
+            Assert.AreEqual(newText2.Length,Text.Length);
+            Assert.AreEqual(newText1.ToPlainText(),newString1);
+            Assert.AreEqual(newText2.ToPlainText(),newString2);
+            Assert.AreEqual(Text.AnySpanReferenceEquals(newText1),false);
+            Assert.AreEqual(Text.AnySpanReferenceEquals(newText2),false);
+
+            Span span = new Span() {
+                Text = s
+            };
+            var newText3 = Text.Insert(1,span);
+            Assert.AreEqual(newText3[1],span);
+            Assert.AreEqual(newText3.Length,Text.Length + 1);
         }
     }
 }
