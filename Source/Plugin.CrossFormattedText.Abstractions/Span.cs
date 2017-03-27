@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Plugin.CrossFormattedText.Abstractions {
+
     public class Span {
 
         public string Text { get; set; } = string.Empty;
@@ -16,7 +17,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
         public FontAttributes FontAttributes { get; set; } = FontAttributes.None;
 
-        public FontSize FontSize { get; set; }
+        public FontSize FontSize { get; set; } = FontSize.Normal;
 
         public ICommand Command { get; set; }
 
@@ -50,10 +51,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
         Italic = 1 << 2
     }
 
-    public class FontSize {
+    public struct FontSize {
 
         public static readonly FontSize UltraBig = new FontSize(1.5f);
         public static readonly FontSize Big = new FontSize(1.25f);
+        public static readonly FontSize Normal = new FontSize(1f);
         public static readonly FontSize Small = new FontSize(0.75f);
         public static readonly FontSize UltraSmall = new FontSize(0.5f);
 

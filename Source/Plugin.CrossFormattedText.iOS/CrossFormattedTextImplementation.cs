@@ -29,7 +29,7 @@ namespace Plugin.CrossFormattedText {
                     var baseFontDescriptor = UIFont.SystemFontOfSize(UIFont.SystemFontSize).FontDescriptor;
                     ui.Font = UIFont.FromDescriptor(baseFontDescriptor.CreateWithTraits(UIFontDescriptorSymbolicTraits.Bold | UIFontDescriptorSymbolicTraits.Italic),0);
                 }
-                if(span.FontSize != null) {
+                if(span.FontSize.Proportion != 1f) {
                     ui.Font = ui.Font.WithSize(ui.Font.PointSize * span.FontSize.Proportion);
                 }
                 sb.Append(new NSAttributedString(span.Text,ui));

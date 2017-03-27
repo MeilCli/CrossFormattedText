@@ -24,7 +24,7 @@ namespace Plugin.CrossFormattedText {
                 if(span.BackgroundColor != null) {
                     // not find method
                 }
-                if(span.FontSize != null) {
+                if(span.FontSize.Proportion != 1f) {
                     run.FontSize = run.FontSize * span.FontSize.Proportion;
                 }
                 if(span.FontAttributes == FontAttributes.Bold) {
