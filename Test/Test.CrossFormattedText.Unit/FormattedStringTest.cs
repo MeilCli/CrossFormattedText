@@ -70,5 +70,37 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(Text.EndsWith(span1),true);
             Assert.AreEqual(Text.EndsWith(span2),false);
         }
+
+        [TestMethod]
+        public void IndexOfTest() {
+            Assert.AreEqual(Text.IndexOf('T'),0);
+            Assert.AreEqual(Text.IndexOf(' '),4);
+            Assert.AreEqual(Text.IndexOf('<'),-1);
+            Assert.AreEqual(Text.IndexOf(' ',5,3),7);
+            Assert.AreEqual(Text.IndexOf(' ',5,2),-1);
+            Assert.AreEqual(Text.IndexOf('.',Text.Length - 1),Text.Length - 1);
+
+            Assert.AreEqual(Text.IndexOf("T"),0);
+            Assert.AreEqual(Text.IndexOf("This "),0);
+            Assert.AreEqual(Text.IndexOf("This ",1),21);
+            Assert.AreEqual(Text.IndexOf("text.",Text.Length - 5),Text.Length - 5);
+            Assert.AreEqual(Text.IndexOf("text.",Text.Length - 4),-1);
+            Assert.AreEqual(Text.IndexOf("That"),-1);
+
+            Span span1 = new Span() {
+                Text = "This is sample text."
+            };
+            Span span2 = new Span() {
+                Text = "This is text."
+            };
+            Span span3 = new Span() {
+                Text = "That is text."
+            };
+            Assert.AreEqual(Text.IndexOf(span1),0);
+            Assert.AreEqual(Text.IndexOf(span2),4);
+            Assert.AreEqual(Text.IndexOf(span1,1),-1);
+            Assert.AreEqual(Text.IndexOf(span2,0,1),-1);
+            Assert.AreEqual(Text.IndexOf(span3),-1);
+        }
     }
 }
