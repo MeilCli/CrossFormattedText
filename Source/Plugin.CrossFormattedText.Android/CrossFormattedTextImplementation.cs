@@ -11,7 +11,7 @@ namespace Plugin.CrossFormattedText {
 
             int startIndex = 0;
             int endIndex;
-            foreach(var span in formattedString.Spans) {
+            foreach(var span in formattedString) {
                 sb.Append(span.Text);
                 endIndex = startIndex + span.Text.Length;
 

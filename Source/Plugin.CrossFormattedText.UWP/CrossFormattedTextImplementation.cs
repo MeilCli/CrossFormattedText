@@ -18,7 +18,7 @@ namespace Plugin.CrossFormattedText {
         public ISpannableString Format(FormattedString formattedString) {
             var sb = new List<Inline>();
 
-            foreach(var span in formattedString.Spans) {
+            foreach(var span in formattedString) {
                 var run = new Run() {
                     Text = span.Text
                 };

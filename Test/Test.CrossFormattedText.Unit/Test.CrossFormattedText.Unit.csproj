@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FontSizeTest.cs" />
+    <Compile Include="FormattedStringTest.cs" />
     <Compile Include="SpanColorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpanTest.cs" />

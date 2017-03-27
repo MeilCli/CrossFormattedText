@@ -9,7 +9,7 @@ namespace Plugin.CrossFormattedText {
         public ISpannableString Format(FormattedString formattedString) {
             var sb = new NSMutableAttributedString();
 
-            foreach(var span in formattedString.Spans) {
+            foreach(var span in formattedString) {
                 if(span.ForegroundColor != null && span.BackgroundColor != null && (span.FontAttributes & FontAttributes.None) == FontAttributes.None) {
                     sb.Append(new NSAttributedString(span.Text));
                     continue;

@@ -35,9 +35,11 @@
     <DocumentationFile>bin\Release\Plugin.CrossFormattedText.Abstractions.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CharSpan.cs" />
     <Compile Include="FontAttributes.cs" />
     <Compile Include="FontSize.cs" />
     <Compile Include="FormattedString.cs" />
+    <Compile Include="FormattedStringBuilder.cs" />
     <Compile Include="ICrossFormattedText.cs" />
     <Compile Include="ISpannableString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

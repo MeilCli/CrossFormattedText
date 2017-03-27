@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 
 namespace Plugin.CrossFormattedText.Abstractions {
 
-    public class Span : IEquatable<Span> {
+    public class Span : IEquatable<Span>, IEnumerable<CharSpan> {
 
         public string Text { get; set; } = string.Empty;
 
@@ -97,6 +98,18 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return hash;
         }
 
+        public IEnumerator<CharSpan> GetEnumerator() {
+            if(Text == null) {
+                yield break;
+            }
+            foreach(char c in Text) {
+                yield return new CharSpan(c,this);
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
     }
 
 }
