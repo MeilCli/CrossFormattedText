@@ -93,5 +93,23 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText3[1].Equals(span),true);
             Assert.AreEqual(newText3.Length,Text.Length + 1);
         }
+
+        [TestMethod]
+        public void LastIndexOfTest() {
+            Span span1 = new Span() {
+                Text = "This is sample text."
+            };
+            Span span2 = new Span() {
+                Text = "This is text."
+            };
+            Span span3 = new Span() {
+                Text = "That is text."
+            };
+            Assert.AreEqual(Text.LastIndexOf(span1),0);
+            Assert.AreEqual(Text.LastIndexOf(span2),4);
+            Assert.AreEqual(Text.LastIndexOf(span1,1),0);
+            Assert.AreEqual(Text.LastIndexOf(span2,1,1),-1);
+            Assert.AreEqual(Text.LastIndexOf(span3),-1);
+        }
     }
 }

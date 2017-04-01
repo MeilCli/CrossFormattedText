@@ -221,6 +221,60 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return new FormattedString(nAr);
         }
 
+        public int LastIndexOf(char value) {
+            return ToPlainText().LastIndexOf(value);
+        }
+
+        public int LastIndexOf(char value,int startIndex) {
+            return ToPlainText().LastIndexOf(value,startIndex);
+        }
+
+        public int LastIndexOf(char value,int startIndex,int count) {
+            return ToPlainText().LastIndexOf(value,startIndex,count);
+        }
+
+        public int LastIndexOf(string value) {
+            return ToPlainText().LastIndexOf(value);
+        }
+
+        public int LastIndexOf(string value,int startIndex) {
+            return ToPlainText().LastIndexOf(value,startIndex);
+        }
+
+        public int LastIndexOf(string value,int startIndex,int count) {
+            return ToPlainText().LastIndexOf(value,startIndex,count);
+        }
+
+        public int LastIndexOf(Span value) {
+            return LastIndexOf(value,Length - 1);
+        }
+
+        public int LastIndexOf(Span value,int startIndex) {
+            return LastIndexOf(value,startIndex,startIndex + 1);
+        }
+
+        public int LastIndexOf(Span value,int startIndex,int count) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            if(startIndex < 0 || startIndex >= spans.Length) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(count < 0 || startIndex - count + 1 < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            int index = startIndex;
+            for(int i = 0;i < count;i++) {
+                if(spans[index].Equals(value)) {
+                    return index;
+                }
+                index--;
+            }
+            return -1;
+        }
+
         public string ToPlainText() {
             var sb = new StringBuilder();
             foreach(var span in spans) {
