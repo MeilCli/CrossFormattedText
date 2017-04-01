@@ -92,10 +92,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public bool Contains(string value) {
-            if(value?.Length == 0) {
-                return true;
-            }
-            return IndexOf(value) != -1;
+            return ToPlainText().Contains(value);
         }
 
         public bool Contains(Span value) {
@@ -103,26 +100,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public bool EndsWith(string value) {
-            if(value == null) {
-                throw new ArgumentNullException(nameof(value));
-            }
-            if(value.Length == 0) {
-                return true;
-            }
-
-            char[] vAr = value.ToCharArray();
-            CharSpan[] sAr = ToCharSpanArray();
-
-            if(vAr.Length > sAr.Length) {
-                return false;
-            }
-
-            for(int i = vAr.Length - 1, j = sAr.Length - 1;i >= 0;i--, j--) {
-                if(vAr[i] != sAr[j].Character) {
-                    return false;
-                }
-            }
-            return true;
+            return ToPlainText().EndsWith(value);
         }
 
         public bool EndsWith(Span value) {
@@ -145,25 +123,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public int IndexOf(char value,int startIndex,int count) {
-            if(startIndex < 0 || startIndex >= TextLength) {
-                throw new ArgumentOutOfRangeException(nameof(startIndex));
-            }
-            if(count < 0 || count > TextLength - startIndex) {
-                throw new ArgumentOutOfRangeException(nameof(count));
-            }
-
-            CharSpan[] sAr = ToCharSpanArray();
-
-            if(sAr.Length == 0) {
-                return -1;
-            }
-
-            for(int i = 0;i < count;i++) {
-                if(sAr[startIndex + i].Character == value) {
-                    return startIndex + i;
-                }
-            }
-            return -1;
+            return ToPlainText().IndexOf(value,startIndex,count);
         }
 
         public int IndexOf(string value) {
@@ -175,45 +135,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public int IndexOf(string value,int startIndex,int count) {
-            if(startIndex < 0 || startIndex >= TextLength) {
-                throw new ArgumentOutOfRangeException(nameof(startIndex));
-            }
-            if(count < 0 || count > TextLength - startIndex) {
-                throw new ArgumentOutOfRangeException(nameof(count));
-            }
-            if(value == null) {
-                throw new ArgumentNullException(nameof(value));
-            }
-            if(value.Length == 0) {
-                return -1;
-            }
-
-            char[] vAr = value.ToCharArray();
-            CharSpan[] sAr = ToCharSpanArray();
-
-            if(vAr.Length == 1) {
-                return IndexOf(vAr[0],startIndex,count);
-            }
-
-            if(vAr.Length > sAr.Length) {
-                return -1;
-            }
-
-            // vAr.Length >= 1 && vAr.Length <= sAr.Length
-            for(int i = startIndex;i < startIndex + count;i++) {
-                if(sAr[i].Character != vAr[0]) {
-                    continue;
-                }
-                for(int j = 1;j < vAr.Length && i + j < sAr.Length;j++) {
-                    if(sAr[i + j].Character != vAr[j]) {
-                        break;
-                    }
-                    if(j == vAr.Length - 1) {
-                        return i;
-                    }
-                }
-            }
-            return -1;
+            return ToPlainText().IndexOf(value,startIndex,count);
         }
 
         public int IndexOf(Span value) {
