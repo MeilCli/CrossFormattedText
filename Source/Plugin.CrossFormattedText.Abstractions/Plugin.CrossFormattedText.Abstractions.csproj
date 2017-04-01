@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CharSpan.cs" />
+    <Compile Include="EditableSpan.cs" />
     <Compile Include="FontAttributes.cs" />
     <Compile Include="FontSize.cs" />
     <Compile Include="FormattedString.cs" />

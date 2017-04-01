@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Plugin.CrossFormattedText.Abstractions {
 
-    public class FormattedString : IEnumerable<Span> {
+    public class FormattedString : IEnumerable<EditableSpan> {
 
         public static readonly FormattedString Empty = new FormattedString();
 
@@ -25,12 +25,12 @@ namespace Plugin.CrossFormattedText.Abstractions {
             this.spans = spans;
         }
 
-        public Span this[int index] {
+        public EditableSpan this[int index] {
             get {
                 if(index < 0 || index >= spans.Length) {
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
-                return spans[index].Clone();
+                return new EditableSpan(spans[index]);
             }
         }
 
@@ -241,9 +241,9 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return false;
         }
 
-        public IEnumerator<Span> GetEnumerator() {
+        public IEnumerator<EditableSpan> GetEnumerator() {
             foreach(var span in spans) {
-                yield return span.Clone();
+                yield return new EditableSpan(span);
             }
         }
 

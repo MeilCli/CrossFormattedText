@@ -90,7 +90,7 @@ namespace Test.CrossFormattedText.Unit {
                 Text = s
             };
             var newText3 = Text.Insert(1,span);
-            Assert.AreEqual(newText3[1],span);
+            Assert.AreEqual(newText3[1].Equals(span),true);
             Assert.AreEqual(newText3.Length,Text.Length + 1);
         }
     }
