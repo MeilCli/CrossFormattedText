@@ -92,57 +92,14 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public bool Contains(string value) {
-            if(value == null) {
-                throw new ArgumentNullException(nameof(value));
-            }
-            if(value.Length == 0) {
+            if(value?.Length == 0) {
                 return true;
             }
-
-            char[] vAr = value.ToCharArray();
-            CharSpan[] sAr = ToCharSpanArray();
-
-            if(vAr.Length == 1) {
-                foreach(var c in sAr) {
-                    if(c.Character == vAr[0]) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            if(vAr.Length > sAr.Length) {
-                return false;
-            }
-
-            // vAr.Length >= 1 && vAr.Length <= sAr.Length
-            for(int i = 0;i < sAr.Length;i++) {
-                if(sAr[i].Character != vAr[0]) {
-                    continue;
-                }
-                for(int j = 1;j < vAr.Length && i + j < sAr.Length;j++) {
-                    if(sAr[i + j].Character != vAr[j]) {
-                        break;
-                    }
-                    if(j == vAr.Length - 1) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return IndexOf(value) != -1;
         }
 
         public bool Contains(Span value) {
-            if(value == null) {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            foreach(var span in spans) {
-                if(span.Equals(value)) {
-                    return true;
-                }
-            }
-            return false;
+            return IndexOf(value) != -1;
         }
 
         public bool EndsWith(string value) {
