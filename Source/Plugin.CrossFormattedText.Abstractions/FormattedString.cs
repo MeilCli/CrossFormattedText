@@ -58,7 +58,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
             for(int i = 0;i < spans.Length;i++) {
                 Span span = spans[i];
                 foreach(var c in span.Text) {
-                    ar[index] = new CharSpan(c,i);
+                    ar[index] = new CharSpan(c,span);
                     index++;
                 }
             }
@@ -67,23 +67,20 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
         internal FormattedString MergeCharSpan(CharSpan[] newSpans) {
             var list = new List<Span>();
-            int? currentSpanNumber = null;
             Span currentSpan = null;
             var sb = new StringBuilder();
             for(int i = 0;i < newSpans.Length;i++) {
                 CharSpan c = newSpans[i];
-                if(currentSpanNumber != null && currentSpanNumber != c.SpanNumber) {
+                if(currentSpan != null && ReferenceEquals(currentSpan,c.Span) == false) {
                     Span span = currentSpan.Clone();
                     span.Text = sb.ToString();
                     sb.Clear();
-                    currentSpanNumber = null;
                     currentSpan = null;
                     list.Add(span);
                 }
                 if(currentSpan == null) {
-                    currentSpan = c.Span ?? spans[c.SpanNumber];
+                    currentSpan = c.Span;
                 }
-                currentSpanNumber = c.SpanNumber;
                 sb.Append(c.Character);
             }
             if(currentSpan != null) {
@@ -309,19 +306,16 @@ namespace Plugin.CrossFormattedText.Abstractions {
             CharSpan[] nAr = new CharSpan[TextLength + value.Length];
 
             Span newSpan;
-            int newSpanNumber;
             if(operand == SpanOperand.Left && startIndex - 1 >= 0) {
                 newSpan = sAr[startIndex - 1].Span;
-                newSpanNumber = sAr[startIndex - 1].SpanNumber;
             } else {
                 newSpan = sAr[startIndex].Span;
-                newSpanNumber = sAr[startIndex].SpanNumber;
             }
             int index = 0;
             for(int i = 0;i < sAr.Length;i++) {
                 if(i == startIndex) {
                     foreach(var c in value) {
-                        nAr[index] = new CharSpan(c,newSpan,newSpanNumber);
+                        nAr[index] = new CharSpan(c,newSpan);
                         index++;
                     }
                 }
