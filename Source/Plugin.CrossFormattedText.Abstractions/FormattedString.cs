@@ -268,17 +268,15 @@ namespace Plugin.CrossFormattedText.Abstractions {
             } else {
                 newSpan = sAr[startIndex].Span;
             }
-            int index = 0;
-            for(int i = 0;i < sAr.Length;i++) {
-                if(i == startIndex) {
-                    foreach(var c in value) {
-                        nAr[index] = new CharSpan(c,newSpan);
-                        index++;
-                    }
-                }
-                nAr[index] = sAr[i];
-                index++;
+
+            CharSpan[] iAr = new CharSpan[value.Length];
+            for(int i = 0;i < value.Length;i++) {
+                iAr[i] = new CharSpan(value[i],newSpan);
             }
+
+            Array.Copy(sAr,nAr,startIndex);
+            Array.Copy(sAr,startIndex,nAr,startIndex + iAr.Length,sAr.Length - startIndex);
+            Array.Copy(iAr,0,nAr,startIndex,iAr.Length);
 
             return MergeCharSpan(nAr);
         }
@@ -292,15 +290,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
             }
 
             Span[] nAr = new Span[spans.Length + 1];
-            int index = 0;
-            for(int i = 0;i < spans.Length;i++) {
-                if(i == insertIndex) {
-                    nAr[index] = value.Clone();
-                    index++;
-                }
-                nAr[index] = spans[i].Clone();
-                index++;
-            }
+            Span newSpan = value.Clone();
+
+            Array.Copy(spans,nAr,insertIndex);
+            Array.Copy(spans,insertIndex,nAr,insertIndex + 1,spans.Length - insertIndex);
+            nAr[insertIndex] = newSpan;
 
             return new FormattedString(nAr);
         }
