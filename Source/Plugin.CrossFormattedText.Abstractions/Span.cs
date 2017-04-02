@@ -10,7 +10,18 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
     public class Span : IEquatable<Span>, IEnumerable<CharSpan> {
 
-        public string Text { get; set; } = string.Empty;
+        private string _text = string.Empty;
+        public string Text {
+            get {
+                return _text;
+            }
+            set {
+                if(value == null) {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                _text = value;
+            }
+        }
 
         public SpanColor BackgroundColor { get; set; } = SpanColor.DefaultValue;
 
