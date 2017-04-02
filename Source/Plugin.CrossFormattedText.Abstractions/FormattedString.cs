@@ -179,6 +179,21 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public FormattedString Insert(int startIndex,string value,SpanOperand operand) {
+            return Insert(startIndex,value,null,operand);
+        }
+
+        public FormattedString Insert(int startIndex,Span span) {
+            if(span == null) {
+                throw new ArgumentNullException(nameof(span));
+            }
+            return Insert(startIndex,span.Text,span);
+        }
+
+        public FormattedString Insert(int startIndex,string value,Span span) {
+            return Insert(startIndex,value,span,SpanOperand.Right);
+        }
+
+        internal FormattedString Insert(int startIndex,string value,Span span,SpanOperand operand) {
             if(startIndex < 0 || startIndex >= TextLength) {
                 throw new ArgumentOutOfRangeException(nameof(startIndex));
             }
