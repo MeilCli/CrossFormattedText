@@ -92,6 +92,7 @@ namespace Test.CrossFormattedText.Unit {
             var newText3 = Text.Insert(1,span);
             Assert.AreEqual(newText3[1].Equals(span),true);
             Assert.AreEqual(newText3.Length,Text.Length + 1);
+            Assert.AreEqual(Text.AnySpanReferenceEquals(newText3),false);
         }
 
         [TestMethod]

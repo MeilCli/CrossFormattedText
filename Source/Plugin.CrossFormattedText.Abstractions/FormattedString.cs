@@ -63,6 +63,14 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return ar;
         }
 
+        internal Span[] ToClonedSpanArray() {
+            var ar = new Span[spans.Length];
+            for(int i = 0;i < spans.Length;i++) {
+                ar[i] = spans[i].Clone();
+            }
+            return ar;
+        }
+
         internal FormattedString MergeCharSpan(CharSpan[] newSpans) {
             var list = new List<Span>();
             Span currentSpan = null;
@@ -209,11 +217,12 @@ namespace Plugin.CrossFormattedText.Abstractions {
                 throw new ArgumentNullException(nameof(value));
             }
 
+            Span[] sAr = ToClonedSpanArray();
             Span[] nAr = new Span[spans.Length + 1];
             Span newSpan = value.Clone();
 
-            Array.Copy(spans,nAr,insertIndex);
-            Array.Copy(spans,insertIndex,nAr,insertIndex + 1,spans.Length - insertIndex);
+            Array.Copy(sAr,nAr,insertIndex);
+            Array.Copy(sAr,insertIndex,nAr,insertIndex + 1,sAr.Length - insertIndex);
             nAr[insertIndex] = newSpan;
 
             return new FormattedString(nAr);
