@@ -28,31 +28,31 @@ namespace Test.CrossFormattedText.Unit {
         });
         
         [TestMethod]
-        public void ContainsTest() {
+        public void ContainsSpanTest() {
             Span span1 = new Span() {
                 Text = "This is text."
             };
             Span span2 = new Span() {
                 Text = "That is text."
             };
-            Assert.AreEqual(text.Contains(span1),true);
-            Assert.AreEqual(text.Contains(span2),false);
+            Assert.AreEqual(text.ContainsSpan(span1),true);
+            Assert.AreEqual(text.ContainsSpan(span2),false);
         }
 
         [TestMethod]
-        public void EndsWithTest() {
+        public void EndsWithSpanTest() {
             Span span1 = new Span() {
                 Text = "This is text."
             };
             Span span2 = new Span() {
                 Text = "That is text."
             };
-            Assert.AreEqual(text.EndsWith(span1),true);
-            Assert.AreEqual(text.EndsWith(span2),false);
+            Assert.AreEqual(text.EndsWithSpan(span1),true);
+            Assert.AreEqual(text.EndsWithSpan(span2),false);
         }
 
         [TestMethod]
-        public void IndexOfTest() {
+        public void IndexOfSpanTest() {
             Span span1 = new Span() {
                 Text = "This is sample text."
             };
@@ -62,11 +62,11 @@ namespace Test.CrossFormattedText.Unit {
             Span span3 = new Span() {
                 Text = "That is text."
             };
-            Assert.AreEqual(text.IndexOf(span1),0);
-            Assert.AreEqual(text.IndexOf(span2),4);
-            Assert.AreEqual(text.IndexOf(span1,1),-1);
-            Assert.AreEqual(text.IndexOf(span2,0,1),-1);
-            Assert.AreEqual(text.IndexOf(span3),-1);
+            Assert.AreEqual(text.IndexOfSpan(span1),0);
+            Assert.AreEqual(text.IndexOfSpan(span2),4);
+            Assert.AreEqual(text.IndexOfSpan(span1,1),-1);
+            Assert.AreEqual(text.IndexOfSpan(span2,0,1),-1);
+            Assert.AreEqual(text.IndexOfSpan(span3),-1);
         }
 
         [TestMethod]
@@ -84,19 +84,24 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText1.Text,newString1);
             Assert.AreEqual(newText2.Text,newString2);
             Assert.AreEqual(text.AnySpanReferenceEquals(newText1),false);
-            Assert.AreEqual(text.AnySpanReferenceEquals(newText2),false);
+            Assert.AreEqual(text.AnySpanReferenceEquals(newText2),false);            
+        }
+
+        [TestMethod]
+        public void InsertSpanTest() {
+            string s = " That is text.";
 
             Span span = new Span() {
                 Text = s
             };
-            var newText3 = text.Insert(1,span);
-            Assert.AreEqual(newText3[1].Equals(span),true);
-            Assert.AreEqual(newText3.Length,text.Length + 1);
-            Assert.AreEqual(text.AnySpanReferenceEquals(newText3),false);
+            var newText = text.InsertSpan(1,span);
+            Assert.AreEqual(newText[1].Equals(span),true);
+            Assert.AreEqual(newText.Length,text.Length + 1);
+            Assert.AreEqual(text.AnySpanReferenceEquals(newText),false);
         }
 
         [TestMethod]
-        public void LastIndexOfTest() {
+        public void LastIndexOfSpanTest() {
             Span span1 = new Span() {
                 Text = "This is sample text."
             };
@@ -106,11 +111,11 @@ namespace Test.CrossFormattedText.Unit {
             Span span3 = new Span() {
                 Text = "That is text."
             };
-            Assert.AreEqual(text.LastIndexOf(span1),0);
-            Assert.AreEqual(text.LastIndexOf(span2),4);
-            Assert.AreEqual(text.LastIndexOf(span1,1),0);
-            Assert.AreEqual(text.LastIndexOf(span2,1,1),-1);
-            Assert.AreEqual(text.LastIndexOf(span3),-1);
+            Assert.AreEqual(text.LastIndexOfSpan(span1),0);
+            Assert.AreEqual(text.LastIndexOfSpan(span2),4);
+            Assert.AreEqual(text.LastIndexOfSpan(span1,1),0);
+            Assert.AreEqual(text.LastIndexOfSpan(span2,1,1),-1);
+            Assert.AreEqual(text.LastIndexOfSpan(span3),-1);
         }
 
         [TestMethod]

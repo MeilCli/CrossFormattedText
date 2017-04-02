@@ -103,15 +103,15 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return Text.Contains(value);
         }
 
-        public bool Contains(Span value) {
-            return IndexOf(value) != -1;
+        public bool ContainsSpan(Span value) {
+            return IndexOfSpan(value) != -1;
         }
 
         public bool EndsWith(string value) {
             return Text.EndsWith(value);
         }
 
-        public bool EndsWith(Span value) {
+        public bool EndsWithSpan(Span value) {
             if(value == null) {
                 throw new ArgumentNullException(nameof(value));
             }
@@ -146,15 +146,15 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return Text.IndexOf(value,startIndex,count);
         }
 
-        public int IndexOf(Span value) {
-            return IndexOf(value,0);
+        public int IndexOfSpan(Span value) {
+            return IndexOfSpan(value,0);
         }
 
-        public int IndexOf(Span value,int startIndex) {
-            return IndexOf(value,startIndex,spans.Length - startIndex);
+        public int IndexOfSpan(Span value,int startIndex) {
+            return IndexOfSpan(value,startIndex,spans.Length - startIndex);
         }
 
-        public int IndexOf(Span value,int startIndex,int count) {
+        public int IndexOfSpan(Span value,int startIndex,int count) {
             if(value == null) {
                 throw new ArgumentNullException(nameof(value));
             }
@@ -211,7 +211,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return MergeCharSpan(nAr);
         }
 
-        public FormattedString Insert(int insertIndex,Span value) {
+        public FormattedString InsertSpan(int insertIndex,Span value) {
             if(insertIndex < 0 || insertIndex >= Length) {
                 throw new ArgumentOutOfRangeException(nameof(insertIndex));
             }
@@ -254,15 +254,15 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return Text.LastIndexOf(value,startIndex,count);
         }
 
-        public int LastIndexOf(Span value) {
-            return LastIndexOf(value,Length - 1);
+        public int LastIndexOfSpan(Span value) {
+            return LastIndexOfSpan(value,Length - 1);
         }
 
-        public int LastIndexOf(Span value,int startIndex) {
-            return LastIndexOf(value,startIndex,startIndex + 1);
+        public int LastIndexOfSpan(Span value,int startIndex) {
+            return LastIndexOfSpan(value,startIndex,startIndex + 1);
         }
 
-        public int LastIndexOf(Span value,int startIndex,int count) {
+        public int LastIndexOfSpan(Span value,int startIndex,int count) {
             if(value == null) {
                 throw new ArgumentNullException(nameof(value));
             }
