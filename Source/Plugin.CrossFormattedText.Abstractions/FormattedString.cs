@@ -372,6 +372,9 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public FormattedString Replace(string oldValue,Span newSpan) {
+            if(newSpan == null) {
+                throw new ArgumentNullException(nameof(newSpan));
+            }
             return Replace(oldValue,newSpan.Text,newSpan);
         }
 
