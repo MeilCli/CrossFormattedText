@@ -161,5 +161,18 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText4.Text,text.Text.Replace("t",null));
             Assert.AreEqual(newText4.AnySpanReferenceEquals(text),false);
         }
+
+        [TestMethod]
+        public void ReplaceSpanTest() {
+            Span span = new Span() {
+                Text = "This is text."
+            };
+
+            FormattedString newText = text.ReplaceSpan(span,new Span());
+
+            Assert.AreEqual(newText.Length,text.Length);
+            Assert.AreEqual(newText.Text,text.Text.Replace(span.Text,null));
+            Assert.AreEqual(newText.AnySpanReferenceEquals(text),false);
+        }
     }
 }

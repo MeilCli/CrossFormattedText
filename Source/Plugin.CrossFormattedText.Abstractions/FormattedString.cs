@@ -433,6 +433,24 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return MergeCharSpan(nAr);
         }
 
+        public FormattedString ReplaceSpan(Span oldValue,Span newValue) {
+            if(oldValue == null) {
+                throw new ArgumentNullException(nameof(oldValue));
+            }
+            if(newValue == null) {
+                throw new ArgumentNullException(nameof(newValue));
+            }
+
+            Span[] sAr = ToClonedSpanArray();
+            for(int i = 0;i < sAr.Length;i++) {
+                if(sAr[i].Equals(oldValue)) {
+                    sAr[i] = newValue.Clone();
+                }
+            }
+
+            return new FormattedString(sAr);
+        }
+
         public bool AnySpanReferenceEquals(FormattedString formattedString) {
             foreach(var span1 in spans) {
                 foreach(var span2 in formattedString.spans) {
