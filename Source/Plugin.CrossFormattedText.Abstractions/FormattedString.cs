@@ -308,6 +308,30 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return MergeCharSpan(nAr);
         }
 
+        public FormattedString RemoveSpan(int startIndex) {
+            return RemoveSpan(startIndex,Length - startIndex);
+        }
+
+        public FormattedString RemoveSpan(int startIndex,int count) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+            if(startIndex + count > Length) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(count)}");
+            }
+
+            Span[] sAr = ToClonedSpanArray();
+            Span[] nAr = new Span[Length - count];
+
+            Array.Copy(sAr,nAr,startIndex);
+            Array.Copy(sAr,startIndex + count,nAr,startIndex,Length - startIndex - count);
+
+            return new FormattedString(nAr);
+        }
+
         public bool AnySpanReferenceEquals(FormattedString formattedString) {
             foreach(var span1 in spans) {
                 foreach(var span2 in formattedString.spans) {

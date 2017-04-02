@@ -125,5 +125,19 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
             Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
         }
+
+        [TestMethod]
+        public void RemoveSpanTest() {
+            var newText1 = text.RemoveSpan(1);
+            var newText2 = text.RemoveSpan(1,text.Length - 2);
+
+            Assert.AreEqual(newText1.Length,1);
+            Assert.AreEqual(newText2.Length,2);
+            Assert.AreEqual(newText1[0].Equals(text[0]),true);
+            Assert.AreEqual(newText2[0].Equals(text[0]),true);
+            Assert.AreEqual(newText2[1].Equals(text[text.Length - 1]),true);
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
+        }
     }
 }

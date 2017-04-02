@@ -77,5 +77,9 @@ namespace Plugin.CrossFormattedText.Abstractions {
         public bool Equals(Span span) {
             return span.Equals(span);
         }
+
+        public bool Equals(EditableSpan editableSpan) {
+            return span.Equals(editableSpan?.span);
+        }
     }
 }
