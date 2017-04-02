@@ -139,5 +139,22 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
             Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
         }
+
+        [TestMethod]
+        public void ReplaceTest() {
+            var newText1 = text.Replace('i','1');
+            Assert.AreEqual(newText1.Text,text.Text.Replace('i','1'));
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+
+            var newText2 = text.Replace("t","tt");
+            var newText3 = text.Replace("1",(string)null);
+            var newText4 = text.Replace("t",(string)null);
+            Assert.AreEqual(newText2.Text,text.Text.Replace("t","tt"));
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
+            Assert.AreEqual(newText3.Text,text.Text);
+            Assert.AreEqual(newText3.AnySpanReferenceEquals(text),false);
+            Assert.AreEqual(newText4.Text,text.Text.Replace("t",null));
+            Assert.AreEqual(newText4.AnySpanReferenceEquals(text),false);
+        }
     }
 }

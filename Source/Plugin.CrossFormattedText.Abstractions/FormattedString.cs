@@ -332,6 +332,89 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return new FormattedString(nAr);
         }
 
+        public FormattedString Replace(char oldChar,char newChar) {
+            return Replace(oldChar,newChar,null);
+        }
+
+        public FormattedString Replace(char oldChar,char newChar,Span newSpan) {
+            CharSpan[] sAr = ToCharSpanArray();
+
+            for(int i = 0;i < sAr.Length;i++) {
+                if(sAr[i].Character == oldChar) {
+                    sAr[i] = new CharSpan(newChar,newSpan ?? sAr[i].Span);
+                }
+            }
+
+            return MergeCharSpan(sAr);
+        }
+
+        public FormattedString Replace(string oldValue,string newValue) {
+            return Replace(oldValue,newValue,SpanOperand.Right);
+        }
+
+        public FormattedString Replace(string oldValue,string newValue,SpanOperand operand) {
+            return Replace(oldValue,newValue,null,operand);
+        }
+
+        public FormattedString Replace(string oldValue,Span newSpan) {
+            return Replace(oldValue,newSpan.Text,newSpan);
+        }
+
+        public FormattedString Replace(string oldValue,string newValue,Span newSpan) {
+            return Replace(oldValue,newValue,newSpan,SpanOperand.Right);
+        }
+
+        internal FormattedString Replace(string oldValue,string newValue,Span newSpan,SpanOperand operand) {
+            if(oldValue == null) {
+                throw new ArgumentNullException(nameof(oldValue));
+            }
+            if(oldValue.Length == 0) {
+                throw new ArgumentException(nameof(oldValue));
+            }
+            if(newValue == null) {
+                newValue = string.Empty;
+            }
+
+            int replaceCount = 0;
+            int offset = 0;
+            while((offset = Text.IndexOf(oldValue,offset)) != -1) {
+                replaceCount++;
+                offset += oldValue.Length;
+            }
+
+            CharSpan[] sAr = ToCharSpanArray();
+            CharSpan[] nAr = new CharSpan[sAr.Length + (newValue.Length - oldValue.Length) * replaceCount];
+
+            int oldIndex = 0;
+            int newIndex = 0;
+            for(int i = 0;i < replaceCount;i++) {
+                int index = Text.IndexOf(oldValue,oldIndex);
+                int copySize = index - oldIndex;
+
+                Array.Copy(sAr,oldIndex,nAr,newIndex,copySize);
+
+                oldIndex += copySize + oldValue.Length;
+                newIndex += copySize;
+
+                if(newSpan == null && operand == SpanOperand.Left) {
+                    newSpan = sAr[index].Span;
+                }else if(newSpan==null) {
+                    newSpan = sAr[index + oldValue.Length - 1].Span;
+                }
+
+                newSpan = newSpan.Clone();
+                newSpan.Text = newValue;
+                CharSpan[] rAr = newSpan.ToArray();
+
+                Array.Copy(rAr,0,nAr,newIndex,rAr.Length);
+                newIndex += rAr.Length;
+            }
+
+            Array.Copy(sAr,oldIndex,nAr,newIndex,TextLength - oldIndex);
+
+            return MergeCharSpan(nAr);
+        }
+
         public bool AnySpanReferenceEquals(FormattedString formattedString) {
             foreach(var span1 in spans) {
                 foreach(var span2 in formattedString.spans) {
