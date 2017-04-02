@@ -111,5 +111,18 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(Text.LastIndexOf(span2,1,1),-1);
             Assert.AreEqual(Text.LastIndexOf(span3),-1);
         }
+
+        [TestMethod]
+        public void RemoveTest() {
+            var newText1 = Text.Remove(1);
+            var newText2 = Text.Remove(1,Text.PlainText.Length-2);
+
+            Assert.AreEqual(newText1.PlainText.Length,1);
+            Assert.AreEqual(newText2.PlainText.Length,2);
+            Assert.AreEqual(newText1.PlainText,"T");
+            Assert.AreEqual(newText2.PlainText,"T.");
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(Text),false);
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(Text),false);
+        }
     }
 }

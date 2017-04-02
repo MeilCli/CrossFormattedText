@@ -273,13 +273,36 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return -1;
         }
 
-        public bool AnySpanReferenceEquals(FormattedString formattedString) {
-            if(spans.Length != formattedString.spans.Length) {
-                throw new InvalidOperationException();
+        public FormattedString Remove(int startIndex) {
+            return Remove(startIndex,PlainText.Length - startIndex);
+        }
+
+        public FormattedString Remove(int startIndex,int count) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
             }
-            for(int i = 0;i < spans.Length;i++) {
-                if(ReferenceEquals(spans[i],formattedString.spans[i])) {
-                    return true;
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+            if(startIndex + count > PlainText.Length) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(count)}");
+            }
+
+            CharSpan[] sAr = ToCharSpanArray();
+            CharSpan[] nAr = new CharSpan[PlainText.Length - count];
+
+            Array.Copy(sAr,nAr,startIndex);
+            Array.Copy(sAr,startIndex + count,nAr,startIndex,PlainText.Length - startIndex - count);
+
+            return MergeCharSpan(nAr);
+        }
+
+        public bool AnySpanReferenceEquals(FormattedString formattedString) {
+            foreach(var span1 in spans) {
+                foreach(var span2 in formattedString.spans) {
+                    if(ReferenceEquals(span1,span2)) {
+                        return true;
+                    }
                 }
             }
             return false;
