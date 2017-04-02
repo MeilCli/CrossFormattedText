@@ -74,15 +74,15 @@ namespace Test.CrossFormattedText.Unit {
             string s = " That is text.";
 
             var newText1 = Text.Insert(20,s);
-            var newString1 = Text.PlainText.Insert(20,s);
+            var newString1 = Text.Text.Insert(20,s);
             var newText2 = Text.Insert(20,s,SpanOperand.Left);
-            var newString2 = Text.PlainText.Insert(20,s);
+            var newString2 = Text.Text.Insert(20,s);
             Assert.AreEqual(newText1[1].Text.StartsWith(s),true);
             Assert.AreEqual(newText2[0].Text.EndsWith(s),true);
             Assert.AreEqual(newText1.Length,Text.Length);
             Assert.AreEqual(newText2.Length,Text.Length);
-            Assert.AreEqual(newText1.PlainText,newString1);
-            Assert.AreEqual(newText2.PlainText,newString2);
+            Assert.AreEqual(newText1.Text,newString1);
+            Assert.AreEqual(newText2.Text,newString2);
             Assert.AreEqual(Text.AnySpanReferenceEquals(newText1),false);
             Assert.AreEqual(Text.AnySpanReferenceEquals(newText2),false);
 
@@ -116,12 +116,12 @@ namespace Test.CrossFormattedText.Unit {
         [TestMethod]
         public void RemoveTest() {
             var newText1 = Text.Remove(1);
-            var newText2 = Text.Remove(1,Text.PlainText.Length-2);
+            var newText2 = Text.Remove(1,Text.TextLength-2);
 
-            Assert.AreEqual(newText1.PlainText.Length,1);
-            Assert.AreEqual(newText2.PlainText.Length,2);
-            Assert.AreEqual(newText1.PlainText,"T");
-            Assert.AreEqual(newText2.PlainText,"T.");
+            Assert.AreEqual(newText1.TextLength,1);
+            Assert.AreEqual(newText2.TextLength,2);
+            Assert.AreEqual(newText1.Text,"T");
+            Assert.AreEqual(newText2.Text,"T.");
             Assert.AreEqual(newText1.AnySpanReferenceEquals(Text),false);
             Assert.AreEqual(newText2.AnySpanReferenceEquals(Text),false);
         }

@@ -24,19 +24,21 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
         public int Length => spans.Length;
 
-        private string _plainText;
-        public string PlainText {
+        private string _text;
+        public string Text {
             get {
-                if(_plainText == null) {
+                if(_text == null) {
                     var sb = new StringBuilder();
                     foreach(var span in spans) {
                         sb.Append(span.Text);
                     }
-                    _plainText = sb.ToString();
+                    _text = sb.ToString();
                 }
-                return _plainText;
+                return _text;
             }
         }
+
+        public int TextLength => Text.Length;
 
         public FormattedString() {
             spans = new Span[0];
@@ -51,7 +53,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         internal CharSpan[] ToCharSpanArray() {
-            var ar = new CharSpan[PlainText.Length];
+            var ar = new CharSpan[TextLength];
             int index = 0;
             for(int i = 0;i < spans.Length;i++) {
                 Span span = spans[i];
@@ -98,7 +100,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public bool Contains(string value) {
-            return PlainText.Contains(value);
+            return Text.Contains(value);
         }
 
         public bool Contains(Span value) {
@@ -106,7 +108,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public bool EndsWith(string value) {
-            return PlainText.EndsWith(value);
+            return Text.EndsWith(value);
         }
 
         public bool EndsWith(Span value) {
@@ -121,27 +123,27 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public int IndexOf(char value) {
-            return PlainText.IndexOf(value);
+            return Text.IndexOf(value);
         }
 
         public int IndexOf(char value,int startIndex) {
-            return PlainText.IndexOf(value,startIndex);
+            return Text.IndexOf(value,startIndex);
         }
 
         public int IndexOf(char value,int startIndex,int count) {
-            return PlainText.IndexOf(value,startIndex,count);
+            return Text.IndexOf(value,startIndex,count);
         }
 
         public int IndexOf(string value) {
-            return PlainText.IndexOf(value);
+            return Text.IndexOf(value);
         }
 
         public int IndexOf(string value,int startIndex) {
-            return PlainText.IndexOf(value,startIndex);
+            return Text.IndexOf(value,startIndex);
         }
 
         public int IndexOf(string value,int startIndex,int count) {
-            return PlainText.IndexOf(value,startIndex,count);
+            return Text.IndexOf(value,startIndex,count);
         }
 
         public int IndexOf(Span value) {
@@ -177,7 +179,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public FormattedString Insert(int startIndex,string value,SpanOperand operand) {
-            if(startIndex < 0 || startIndex >= PlainText.Length) {
+            if(startIndex < 0 || startIndex >= TextLength) {
                 throw new ArgumentOutOfRangeException(nameof(startIndex));
             }
             if(value == null) {
@@ -188,7 +190,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
             }
 
             CharSpan[] sAr = ToCharSpanArray();
-            CharSpan[] nAr = new CharSpan[PlainText.Length + value.Length];
+            CharSpan[] nAr = new CharSpan[TextLength + value.Length];
 
             Span newSpan;
             if(operand == SpanOperand.Left && startIndex - 1 >= 0) {
@@ -229,27 +231,27 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public int LastIndexOf(char value) {
-            return PlainText.LastIndexOf(value);
+            return Text.LastIndexOf(value);
         }
 
         public int LastIndexOf(char value,int startIndex) {
-            return PlainText.LastIndexOf(value,startIndex);
+            return Text.LastIndexOf(value,startIndex);
         }
 
         public int LastIndexOf(char value,int startIndex,int count) {
-            return PlainText.LastIndexOf(value,startIndex,count);
+            return Text.LastIndexOf(value,startIndex,count);
         }
 
         public int LastIndexOf(string value) {
-            return PlainText.LastIndexOf(value);
+            return Text.LastIndexOf(value);
         }
 
         public int LastIndexOf(string value,int startIndex) {
-            return PlainText.LastIndexOf(value,startIndex);
+            return Text.LastIndexOf(value,startIndex);
         }
 
         public int LastIndexOf(string value,int startIndex,int count) {
-            return PlainText.LastIndexOf(value,startIndex,count);
+            return Text.LastIndexOf(value,startIndex,count);
         }
 
         public int LastIndexOf(Span value) {
@@ -283,7 +285,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
         }
 
         public FormattedString Remove(int startIndex) {
-            return Remove(startIndex,PlainText.Length - startIndex);
+            return Remove(startIndex,TextLength - startIndex);
         }
 
         public FormattedString Remove(int startIndex,int count) {
@@ -293,15 +295,15 @@ namespace Plugin.CrossFormattedText.Abstractions {
             if(count < 0) {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
-            if(startIndex + count > PlainText.Length) {
+            if(startIndex + count > TextLength) {
                 throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(count)}");
             }
 
             CharSpan[] sAr = ToCharSpanArray();
-            CharSpan[] nAr = new CharSpan[PlainText.Length - count];
+            CharSpan[] nAr = new CharSpan[TextLength - count];
 
             Array.Copy(sAr,nAr,startIndex);
-            Array.Copy(sAr,startIndex + count,nAr,startIndex,PlainText.Length - startIndex - count);
+            Array.Copy(sAr,startIndex + count,nAr,startIndex,TextLength - startIndex - count);
 
             return MergeCharSpan(nAr);
         }
