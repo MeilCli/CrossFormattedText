@@ -731,5 +731,13 @@ namespace Plugin.CrossFormattedText.Abstractions {
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
+
+        public static implicit operator FormattedString(string text) {
+            return new FormattedString(new Span[] { new Span() { Text = text } });
+        }
+
+        public static explicit operator string(FormattedString text) {
+            return text.Text;
+        }
     }
 }

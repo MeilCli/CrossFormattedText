@@ -31,7 +31,7 @@ Do destructive changes!!
   - immutable text(finish)
   - muttable span meta data(finish)
   - encode/decode HTML like span text(not working)
-  - implicit/explicit cast(not working)
+  - implicit/explicit cast(finish)
 - add FormattedStringBuilder(not working)
   - StringBuilder like operation(not working)
   - muttable text(not working)
