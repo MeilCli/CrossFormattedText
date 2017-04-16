@@ -620,6 +620,97 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return new FormattedString(sAr);
         }
 
+        public FormattedString Trim() {
+            return trim(Text.Trim());
+        }
+
+        public FormattedString Trim(params char[] trimChars) {
+            return trim(Text.Trim(trimChars));
+        }
+
+        public FormattedString TrimEnd(params char[] trimChars) {
+            return trim(Text.TrimEnd(trimChars));
+        }
+
+        public FormattedString TrimStart(params char[] trimChars) {
+            return trim(Text.TrimStart(trimChars));
+        }
+
+        private FormattedString trim(string trimedText) {
+            if(trimedText.Length == 0) {
+                return Empty;
+            }
+
+            char startChar = trimedText[0];
+            char endChar = trimedText[trimedText.Length - 1];
+
+            int startIndex = IndexOf(startChar);
+            int endIndex = LastIndexOf(endChar);
+
+            CharSpan[] sAr = ToCharSpanArray();
+            CharSpan[] nAr = new CharSpan[endIndex - startIndex + 1];
+
+            Array.Copy(sAr,startIndex,nAr,0,endIndex - startIndex + 1);
+
+            return MergeCharSpan(nAr);
+        }
+
+        public FormattedString TrimSpan(params Span[] trimSpans) {
+            if(Length == 0) {
+                return this;
+            }
+            int startIndex = 0;
+            int endIndex = Length - 1;
+            trimEndSpan(trimSpans,startIndex,ref endIndex);
+            trimStartSpan(trimSpans,ref startIndex,endIndex);
+
+            return Subspan(startIndex,endIndex - startIndex + 1);
+        }
+
+        public FormattedString TrimEndSpan(params Span[] trimSpans) {
+            if(Length == 0) {
+                return this;
+            }
+            int startIndex = 0;
+            int endIndex = Length - 1;
+            trimEndSpan(trimSpans,startIndex,ref endIndex);
+
+            return Subspan(startIndex,endIndex - startIndex + 1);
+        }
+
+        public FormattedString TrimStartSpan(params Span[] trimSpans) {
+            if(Length == 0) {
+                return this;
+            }
+            int startIndex = 0;
+            int endIndex = Length - 1;
+            trimStartSpan(trimSpans,ref startIndex,endIndex);
+
+            return Subspan(startIndex,endIndex - startIndex + 1);
+        }
+
+        private void trimEndSpan(Span[] trimSpans,int startIndex,ref int endIndex) {
+            for(int i = Length - 1;i >= startIndex;i--) {
+                Span span = spans[i];
+                if(trimSpans.Any(x => x.Equals(span))) {
+                    endIndex--;
+                }else {
+                    break;
+                }
+            }
+        }
+
+        private void trimStartSpan(Span[] trimSpans,ref int startIndex,int endIndex) {
+            for(int i = startIndex;i <= endIndex;i++) {
+                Span span = spans[i];
+                if(trimSpans.Any(x => x.Equals(span))) {
+                    startIndex++;
+                } else {
+                    break;
+                }
+            }
+        }
+
         public bool AnySpanReferenceEquals(FormattedString formattedString) {
             foreach(var span1 in spans) {
                 foreach(var span2 in formattedString.spans) {

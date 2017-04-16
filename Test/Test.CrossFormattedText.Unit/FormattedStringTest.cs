@@ -257,5 +257,38 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText2.Text,text.Text.ToUpperInvariant());
             Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
         }
+
+        [TestMethod]
+        public void TrimTest() {
+            var newText1 = text.Trim('T','t','.');
+
+            Assert.AreEqual(newText1.Text,text.Text.Trim('T','t','.'));
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+
+            var newText2 = text.TrimEnd('T','t','.');
+
+            Assert.AreEqual(newText2.Text,text.Text.TrimEnd('T','t','.'));
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
+
+            var newText3 = text.TrimStart('T','t','.');
+
+            Assert.AreEqual(newText3.Text,text.Text.TrimStart('T','t','.'));
+            Assert.AreEqual(newText3.AnySpanReferenceEquals(text),false);
+        }
+
+        [TestMethod]
+        public void TrimSpanTest() {
+            var startSpan = new Span() {
+                Text = "This is sample text."
+            };
+            var endSpan = new Span() {
+                Text = "This is text."
+            };
+
+            var newText1 = text.TrimSpan(startSpan,endSpan);
+
+            Assert.AreEqual(newText1.Text,text.Subspan(1,3).Text);
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+        }
     }
 }
