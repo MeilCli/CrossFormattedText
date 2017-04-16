@@ -21,6 +21,22 @@ This library rapped some platform span class
 | Windows 8.1| Yes | | ✓ | ✓ | ✓ | ✓ |
 | Mac | No | | | | | |
 
+## Working(Next Version)
+
+Do destructive changes!!
+
+- change FormattedString(working now)
+  - string like operation(finish)
+  - string like span operation(finish)
+  - immutable text(finish)
+  - muttable span meta data(finish)
+  - encode/decode HTML like span text(not working)
+  - implicit/explicit cast(not working)
+- add FormattedStringBuilder(not working)
+  - StringBuilder like operation(not working)
+  - muttable text(not working)
+  - immutable span meta data(not working)
+
 ## Usgae
 
 In PCL: prepare FormattedString
