@@ -416,7 +416,7 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
                 if(newSpan == null && operand == SpanOperand.Left) {
                     newSpan = sAr[index].Span;
-                }else if(newSpan==null) {
+                } else if(newSpan == null) {
                     newSpan = sAr[index + oldValue.Length - 1].Span;
                 }
 
@@ -449,6 +449,134 @@ namespace Plugin.CrossFormattedText.Abstractions {
             }
 
             return new FormattedString(sAr);
+        }
+
+        public FormattedString[] Split(params char[] separator) {
+            return Split(separator,TextLength);
+        }
+
+        public FormattedString[] Split(char[] separator,int count) {
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            string[] tAr = Text.Split(separator,count,StringSplitOptions.RemoveEmptyEntries);
+
+            return split(tAr);
+        }
+
+        public FormattedString[] Split(params string[] separator) {
+            return Split(separator,TextLength);
+        }
+
+        public FormattedString[] Split(string[] separator,int count) {
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            string[] tAr = Text.Split(separator,count,StringSplitOptions.RemoveEmptyEntries);
+
+            return split(tAr);
+        }
+
+        private FormattedString[] split(string[] tAr) {
+            FormattedString[] result = new FormattedString[tAr.Length];
+
+            int index = 0;
+            for(int i = 0;i < tAr.Length;i++) {
+                string value = tAr[i];
+                index = IndexOf(value,index);
+                result[i] = Substring(index,value.Length);
+                index += value.Length;
+            }
+
+            return result;
+        }
+
+        public FormattedString[] SplitSpan(params Span[] separator) {
+            return SplitSpan(separator,Length);
+        }
+
+        public FormattedString[] SplitSpan(Span[] separator,int count) {
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+            if(separator == null) {
+                return new FormattedString[] { this };
+            }
+
+            Span[] sAr = ToClonedSpanArray();
+            List<Span> list = new List<Span>();
+            List<FormattedString> result = new List<FormattedString>();
+
+            for(int i = 0;i < sAr.Length;i++) {
+                Span span = sAr[i];
+                if(separator.All(x => x.Equals(span) == false)) {
+                    list.Add(span);
+                } else if(list.Count > 0) {
+                    result.Add(new FormattedString(list.ToArray()));
+                    list.Clear();
+                }
+            }
+            if(list.Count > 0) {
+                result.Add(new FormattedString(list.ToArray()));
+            }
+
+            return result.ToArray();
+        }
+
+        public bool StartsWith(string value) {
+            return Text.StartsWith(value);
+        }
+
+        public bool StartsWithSpan(Span value) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if(spans.Length == 0) {
+                return false;
+            }
+            return spans[0].Equals(value);
+        }
+
+        public FormattedString Substring(int startIndex) {
+            return Substring(startIndex,TextLength - startIndex);
+        }
+
+        public FormattedString Substring(int startIndex,int length) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(startIndex + length > TextLength) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(length)}");
+            }
+
+            CharSpan[] sAr = ToCharSpanArray();
+            CharSpan[] nAr = new CharSpan[length];
+
+            Array.Copy(sAr,startIndex,nAr,0,length);
+
+            return MergeCharSpan(nAr);
+        }
+
+        public FormattedString Subspan(int startIndex) {
+            return Subspan(startIndex,Length - startIndex);
+        }
+
+        public FormattedString Subspan(int startIndex,int length) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(startIndex + length > Length) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(length)}");
+            }
+
+            Span[] sAr = ToClonedSpanArray();
+            Span[] nAr = new Span[length];
+
+            Array.Copy(sAr,startIndex,nAr,0,length);
+
+            return new FormattedString(nAr);
         }
 
         public bool AnySpanReferenceEquals(FormattedString formattedString) {

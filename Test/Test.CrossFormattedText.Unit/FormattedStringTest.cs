@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Plugin.CrossFormattedText.Abstractions;
+using System.Linq;
 
 namespace Test.CrossFormattedText.Unit {
     
@@ -173,6 +174,62 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText.Length,text.Length);
             Assert.AreEqual(newText.Text,text.Text.Replace(span.Text,null));
             Assert.AreEqual(newText.AnySpanReferenceEquals(text),false);
+        }
+
+        [TestMethod]
+        public void SplitTest() {
+            var newText1 = text.Split('.','\n');
+
+            Assert.AreEqual(newText1.Select(x => x.Text).SequenceEqual(text.Text.Split(new char[] { '.','\n' },StringSplitOptions.RemoveEmptyEntries)),true);
+            Assert.AreEqual(newText1.Any(x => x.AnySpanReferenceEquals(text)),false);
+
+            var newText2 = text.Split(".","\n");
+            Assert.AreEqual(newText2.Select(x => x.Text).SequenceEqual(text.Text.Split(new string[] { ".","\n" },StringSplitOptions.RemoveEmptyEntries)),true);
+            Assert.AreEqual(newText2.Any(x => x.AnySpanReferenceEquals(text)),false);
+        }
+
+        [TestMethod]
+        public void SplitSpanText() {
+            Span span = new Span() {
+                Text = "This is text."
+            };
+            var newText1 = text.SplitSpan(span);
+            var joinedNewText1 = string.Join("",newText1.Select(x => x.Text));
+
+            var sText = text.Text.Split(new string[] { span.Text },StringSplitOptions.RemoveEmptyEntries);
+            Assert.AreEqual(joinedNewText1,string.Join("",sText));
+            Assert.AreEqual(newText1.Any(x => x.AnySpanReferenceEquals(text)),false);
+        }
+
+        [TestMethod]
+        public void StartsWithSpanTest() {
+            Span span1 = new Span() {
+                Text = "This is sample text."
+            };
+            Span span2 = new Span() {
+                Text = "That is sample text."
+            };
+            Assert.AreEqual(text.StartsWithSpan(span1),true);
+            Assert.AreEqual(text.StartsWithSpan(span2),false);
+        }
+
+        [TestMethod]
+        public void SubstringTest() {
+            var newText1 = text.Substring(12);
+            var newText2 = text.Substring(10,2);
+
+            Assert.AreEqual(newText1.Text,text.Text.Substring(12));
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+            Assert.AreEqual(newText2.Text,text.Text.Substring(10,2));
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
+        }
+
+        [TestMethod]
+        public void SubspanText() {
+            var newText1 = text.Subspan(1);
+
+            Assert.AreEqual(newText1.Text,text.Text.Substring(text[0].Text.Length));
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
         }
     }
 }
