@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -577,6 +578,46 @@ namespace Plugin.CrossFormattedText.Abstractions {
             Array.Copy(sAr,startIndex,nAr,0,length);
 
             return new FormattedString(nAr);
+        }
+
+        public FormattedString ToLower() {
+            Span[] sAr = ToClonedSpanArray();
+
+            foreach(Span span in sAr) {
+                span.Text = span.Text.ToLower();
+            }
+
+            return new FormattedString(sAr);
+        }
+
+        public FormattedString ToLowerInvariant() {
+            Span[] sAr = ToClonedSpanArray();
+
+            foreach(Span span in sAr) {
+                span.Text = span.Text.ToLowerInvariant();
+            }
+
+            return new FormattedString(sAr);
+        }
+
+        public FormattedString ToUpper() {
+            Span[] sAr = ToClonedSpanArray();
+
+            foreach(Span span in sAr) {
+                span.Text = span.Text.ToUpper();
+            }
+
+            return new FormattedString(sAr);
+        }
+
+        public FormattedString ToUpperInvariant() {
+            Span[] sAr = ToClonedSpanArray();
+
+            foreach(Span span in sAr) {
+                span.Text = span.Text.ToUpperInvariant();
+            }
+
+            return new FormattedString(sAr);
         }
 
         public bool AnySpanReferenceEquals(FormattedString formattedString) {

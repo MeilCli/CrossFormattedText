@@ -231,5 +231,31 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText1.Text,text.Text.Substring(text[0].Text.Length));
             Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
         }
+
+        [TestMethod]
+        public void ToLowerTest() {
+            var newText1 = text.ToLower();
+
+            Assert.AreEqual(newText1.Text,text.Text.ToLower());
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+
+            var newText2 = text.ToLowerInvariant();
+
+            Assert.AreEqual(newText2.Text,text.Text.ToLowerInvariant());
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
+        }
+
+        [TestMethod]
+        public void ToUpperTest() {
+            var newText1 = text.ToUpper();
+
+            Assert.AreEqual(newText1.Text,text.Text.ToUpper());
+            Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
+
+            var newText2 = text.ToUpperInvariant();
+
+            Assert.AreEqual(newText2.Text,text.Text.ToUpperInvariant());
+            Assert.AreEqual(newText2.AnySpanReferenceEquals(text),false);
+        }
     }
 }
