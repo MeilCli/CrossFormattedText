@@ -25,17 +25,17 @@ This library rapped some platform span class
 
 Do destructive changes!!
 
-- change FormattedString(working now)
+- change FormattedString(working pause)
   - string like operation(finish)
   - string like span operation(finish)
   - immutable text(finish)
   - muttable span meta data(finish)
   - encode/decode HTML like span text(not working)
   - implicit/explicit cast(finish)
-- add FormattedStringBuilder(not working)
-  - StringBuilder like operation(not working)
-  - muttable text(not working)
-  - immutable span meta data(not working)
+- add FormattedStringBuilder(working now)
+  - StringBuilder like operation(working now)
+  - muttable text(working now)
+  - immutable span meta data(working now)
 
 ## Usgae
 
