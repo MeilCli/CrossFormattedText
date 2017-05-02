@@ -30,10 +30,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
             values = newArray;
         }
 
-        public void EnsureCapacity(int minimumCapacity) {
+        public int EnsureCapacity(int minimumCapacity) {
             if(minimumCapacity > Capacity) {
                 expandCapacity(minimumCapacity);
             }
+            return Capacity;
         }
 
         internal FormattedString MergeCharSpan() {
@@ -62,98 +63,100 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return new FormattedString(list.ToArray());
         }
 
-        public void Append(bool value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(bool value) {
+            return Append(value,null);
         }
 
-        public void Append(bool value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(bool value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(byte value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(byte value) {
+            return Append(value,null);
         }
 
-        public void Append(byte value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(byte value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(char value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(char value) {
+            return Append(value,null);
         }
 
-        public void Append(char value,Span span) {
+        public FormattedStringBuilder Append(char value,Span span) {
             EnsureCapacity(Length + 1);
 
             span = span ?? new Span();
             values[Length] = new CharSpan(value,span);
             Length += 1;
+
+            return this;
         }
 
-        public void Append(decimal value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(decimal value) {
+            return Append(value,null);
         }
 
-        public void Append(decimal value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(decimal value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(double value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(double value) {
+            return Append(value,null);
         }
 
-        public void Append(double value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(double value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(float value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(float value) {
+            return Append(value,null);
         }
 
-        public void Append(float value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(float value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(short value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(short value) {
+            return Append(value,null);
         }
 
-        public void Append(short value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(short value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(int value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(int value) {
+            return Append(value,null);
         }
 
-        public void Append(int value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(int value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(long value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(long value) {
+            return Append(value,null);
         }
 
-        public void Append(long value,Span span) {
-            Append(value.ToString(),span);
+        public FormattedStringBuilder Append(long value,Span span) {
+            return Append(value.ToString(),span);
         }
 
-        public void Append(object value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(object value) {
+            return Append(value,null);
         }
 
-        public void Append(object value,Span span) {
+        public FormattedStringBuilder Append(object value,Span span) {
             if(value == null) {
                 throw new ArgumentNullException(nameof(value));
             }
-            Append(value.ToString(),span);
+            return Append(value.ToString(),span);
         }
 
-        public void Append(string value) {
-            Append(value,null);
+        public FormattedStringBuilder Append(string value) {
+            return Append(value,null);
         }
 
-        public void Append(string value,Span span) {
+        public FormattedStringBuilder Append(string value,Span span) {
             if(value == null) {
                 throw new ArgumentNullException(nameof(value));
             }
@@ -165,21 +168,23 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
             Array.Copy(ar,0,values,Length,ar.Length);
             Length += ar.Length;
+
+            return this;
         }
 
-        public void AppendLine() {
-            Append(Environment.NewLine);
+        public FormattedStringBuilder AppendLine() {
+            return Append(Environment.NewLine);
         }
 
-        public void AppendLine(Span span) {
-            Append(Environment.NewLine,span);
+        public FormattedStringBuilder AppendLine(Span span) {
+            return Append(Environment.NewLine,span);
         }
 
-        public void AppendLine(string value) {
-            AppendLine(value,null);
+        public FormattedStringBuilder AppendLine(string value) {
+            return AppendLine(value,null);
         }
 
-        public void AppendLine(string value,Span span) {
+        public FormattedStringBuilder AppendLine(string value,Span span) {
             if(value == null) {
                 throw new ArgumentNullException(nameof(value));
             }
@@ -191,6 +196,8 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
             Array.Copy(ar,0,values,Length,ar.Length);
             Length += ar.Length;
+
+            return this;
         }
 
         public FormattedString ToFormattedString() {
