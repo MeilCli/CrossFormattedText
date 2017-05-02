@@ -167,6 +167,32 @@ namespace Plugin.CrossFormattedText.Abstractions {
             Length += ar.Length;
         }
 
+        public void AppendLine() {
+            Append(Environment.NewLine);
+        }
+
+        public void AppendLine(Span span) {
+            Append(Environment.NewLine,span);
+        }
+
+        public void AppendLine(string value) {
+            AppendLine(value,null);
+        }
+
+        public void AppendLine(string value,Span span) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            EnsureCapacity(Length + value.Length + Environment.NewLine.Length);
+
+            span = span ?? new Span();
+            CharSpan[] ar = (value + Environment.NewLine).ToCharArray().Select(x => new CharSpan(x,span)).ToArray();
+
+            Array.Copy(ar,0,values,Length,ar.Length);
+            Length += ar.Length;
+        }
+
         public FormattedString ToFormattedString() {
             return MergeCharSpan();
         }

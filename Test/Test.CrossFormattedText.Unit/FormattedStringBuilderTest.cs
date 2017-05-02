@@ -39,5 +39,18 @@ namespace Test.CrossFormattedText.Unit {
 
             Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
         }
+
+        [TestMethod]
+        public void AppendLineTest() {
+            var sb = new StringBuilder();
+            var fsb = new FormattedStringBuilder();
+
+            sb.AppendLine();
+            fsb.AppendLine();
+            sb.AppendLine("aaa");
+            fsb.AppendLine("aaa");
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+        }
     }
 }
