@@ -200,6 +200,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return this;
         }
 
+        public FormattedStringBuilder Clear() {
+            Length = 0;
+            return this;
+        }
+
         public FormattedString ToFormattedString() {
             return MergeCharSpan();
         }
