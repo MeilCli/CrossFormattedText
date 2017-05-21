@@ -107,5 +107,25 @@ namespace Test.CrossFormattedText.Unit {
 
             Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
         }
+
+        [TestMethod]
+        public void RemoveTest() {
+            var sb = new StringBuilder();
+            var fsb = new FormattedStringBuilder();
+
+            sb.Append("abcdefghijk");
+            fsb.Append("abcdefghijk");
+
+            sb.Remove(0,2);
+            fsb.Remove(0,2);
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+
+            sb.Remove(sb.Length - 3,3);
+            fsb.Remove(fsb.Length - 3,3);
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+        }
     }
 }

@@ -324,6 +324,23 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return this;
         }
 
+        public FormattedStringBuilder Remove(int startIndex,int length) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(length < 0) {
+                throw new ArgumentOutOfRangeException(nameof(length));
+            }
+            if(startIndex + length > Length) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(length)}");
+            }
+
+            Array.Copy(values,startIndex + length,values,startIndex,Length - (startIndex + length));
+            Length -= length;
+
+            return this;
+        }
+
         public FormattedString ToFormattedString() {
             return MergeCharSpan();
         }
