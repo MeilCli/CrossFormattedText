@@ -205,6 +205,125 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return this;
         }
 
+        public FormattedStringBuilder Insert(int index,bool value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,bool value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,byte value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,byte value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,char value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,char value,Span span) {
+            if(index < 0 || Length < index) {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+            EnsureCapacity(Length + 1);
+
+            Array.Copy(values,index,values,index + 1,Length - index);
+
+            span = span ?? new Span();
+            values[index] = new CharSpan(value,span);
+            Length += 1;
+
+            return this;
+        }
+
+        public FormattedStringBuilder Insert(int index,decimal value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,decimal value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,double value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,double value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,float value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,float value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,short value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,short value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,int value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,int value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,long value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,long value,Span span) {
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,object value) {
+            return Insert(index,value,null);
+        }
+
+        public FormattedStringBuilder Insert(int index,object value,Span span) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+            return Insert(index,value.ToString(),span);
+        }
+
+        public FormattedStringBuilder Insert(int index,string value) {
+            return Insert(index,value,null);
+        }    
+
+        public FormattedStringBuilder Insert(int index,string value,Span span) {
+            if(index < 0 || Length < index) {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            EnsureCapacity(Length + value.Length);
+
+            Array.Copy(values,index,values,index + value.Length,Length - index);
+
+            span = span ?? new Span();
+            CharSpan[] ar = value.ToCharArray().Select(x => new CharSpan(x,span)).ToArray();
+
+            Array.Copy(ar,0,values,index,ar.Length);
+            Length += ar.Length;
+
+            return this;
+        }
+
         public FormattedString ToFormattedString() {
             return MergeCharSpan();
         }
