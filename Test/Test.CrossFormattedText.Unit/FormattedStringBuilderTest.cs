@@ -127,5 +127,71 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
             Assert.AreEqual(fsb.Length,sb.Length);
         }
+
+        [TestMethod]
+        public void ReplaceTest() {
+            var sb = new StringBuilder();
+            var fsb = new FormattedStringBuilder();
+
+            sb.Append("ashgilassfianvlaih");
+            fsb.Append("ashgilassfianvlaih");
+            sb.Replace('a','b');
+            fsb.Replace('a','b');
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+
+            sb.Clear();
+            fsb.Clear();
+            sb.Append("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            fsb.Append("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            sb.Replace('a','b',2,4);
+            fsb.Replace('a','b',2,4);
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+
+            sb.Clear();
+            fsb.Clear();
+            sb.Append("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            fsb.Append("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            sb.Replace("a","[]");
+            fsb.Replace("a","[]");
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+
+            sb.Replace("[]","a");
+            fsb.Replace("[]","a");
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+
+            sb.Replace("aaa","b");
+            fsb.Replace("aaa","b");
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+
+            sb.Replace("b","a",1,2);
+            fsb.Replace("b","a",1,2);
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+
+            sb.Replace("a","");
+            fsb.Replace("a","");
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+
+            sb.Clear();
+            fsb.Clear();
+            sb.Append("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            fsb.Append("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            sb.Replace("c","[]");
+            fsb.Replace("c","[]");
+
+            Assert.AreEqual(fsb.ToFormattedString().Text,sb.ToString());
+            Assert.AreEqual(fsb.Length,sb.Length);
+        }
     }
 }

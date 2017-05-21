@@ -341,6 +341,143 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return this;
         }
 
+        public FormattedStringBuilder Replace(char oldChar,char newChar) {
+            return Replace(oldChar,newChar,null);
+        }
+
+        public FormattedStringBuilder Replace(char oldChar,char newChar,Span newSpan) {
+            return Replace(oldChar,newChar,newSpan,0,Length);
+        }
+
+        public FormattedStringBuilder Replace(char oldChar,char newChar,int startIndex,int count) {
+            return Replace(oldChar,newChar,null,startIndex,count);
+        }
+
+        public FormattedStringBuilder Replace(char oldChar,char newChar,Span newSpan,int startIndex,int count) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+            if(startIndex + count > Length) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(count)}");
+            }
+
+            for(int i = startIndex;i < startIndex + count;i++) {
+                if(values[i].Character == oldChar) {
+                    values[i] = new CharSpan(newChar,newSpan ?? values[i].Span);
+                }
+            }
+
+            return this;
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue) {
+            return Replace(oldValue,newValue,0,Length);
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue,Span newSpan) {
+            return Replace(oldValue,newValue,newSpan,0,Length);
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue,SpanOperand operand) {
+            return Replace(oldValue,newValue,operand,0,Length);
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue,int startIndex,int count) {
+            return Replace(oldValue,newValue,null,SpanOperand.Left,startIndex,count);
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue,Span newSpan,int startIndex,int count) {
+            return Replace(oldValue,newValue,newSpan,SpanOperand.Left,startIndex,count);
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue,SpanOperand operand,int startIndex,int count) {
+            return Replace(oldValue,newValue,null,operand,startIndex,count);
+        }
+
+        public FormattedStringBuilder Replace(string oldValue,string newValue,Span newSpan,SpanOperand operand,int startIndex,int count) {
+            if(startIndex < 0) {
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
+            if(count < 0) {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+            if(startIndex + count > Length) {
+                throw new ArgumentOutOfRangeException($"{nameof(startIndex)} + {nameof(count)}");
+            }
+            if(oldValue == null) {
+                throw new ArgumentNullException(nameof(oldValue));
+            }
+            if(newValue == null) {
+                newValue = string.Empty;
+            }
+
+            int[] replacements = new int[5];
+            int replacementsCount = 0;
+            
+            for(int i = startIndex;i < startIndex + count - (oldValue.Length - 1);) {
+                if(startWith(oldValue,i) == false) {
+                    i++;
+                    continue;
+                }
+
+                if(replacementsCount < replacements.Length) {
+                    replacements[replacementsCount] = i;
+                }else {
+                    int[] newArray = new int[replacements.Length * 3 / 2 + 4];
+                    Array.Copy(replacements,newArray,replacements.Length);
+                    replacements = newArray;
+                    replacements[replacementsCount] = i;
+                }
+                replacementsCount++;
+
+                i += oldValue.Length;
+            }
+
+            EnsureCapacity(Length + (newValue.Length - oldValue.Length) * replacementsCount);
+
+            for(int i = replacementsCount - 1;i >= 0;i--) {
+                int replacementsStartIndex = replacements[i];
+
+                Array.Copy(
+                    values,replacementsStartIndex + oldValue.Length,
+                    values,replacementsStartIndex + newValue.Length,
+                    Length - (replacementsStartIndex + oldValue.Length));
+
+                if(newSpan == null && operand == SpanOperand.Left) {
+                    newSpan = values[i].Span;
+                } else if(newSpan == null) {
+                    newSpan = values[i + oldValue.Length - 1].Span;
+                }
+
+                newSpan.Text = newValue;
+                CharSpan[] rAr = newSpan.ToArray();
+
+                Array.Copy(rAr,0,values,replacementsStartIndex,rAr.Length);
+
+                Length += newValue.Length - oldValue.Length;
+            }
+
+            return this;
+        }
+
+        private bool startWith(string value,int startIndex) {
+            if(startIndex + value.Length > Length) {
+                return false;
+            }
+
+            int index = startIndex;
+            foreach(char c in value) {
+                if(values[index].Character != c) {
+                    return false;
+                }
+                index++;
+            }
+            return true;
+        }
+
         public FormattedString ToFormattedString() {
             return MergeCharSpan();
         }
