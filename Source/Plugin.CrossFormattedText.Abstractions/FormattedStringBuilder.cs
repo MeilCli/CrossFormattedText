@@ -152,6 +152,18 @@ namespace Plugin.CrossFormattedText.Abstractions {
             return Append(value.ToString(),span);
         }
 
+        /// <summary>
+        /// call Append(string,Span) method using value.Text value
+        /// </summary>
+        /// <param name="value">append text and span value</param>
+        /// <returns>this instance</returns>
+        public FormattedStringBuilder Append(Span value) {
+            if(value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
+            return Append(value.Text,value);
+        }
+
         public FormattedStringBuilder Append(string value) {
             return Append(value,null);
         }
