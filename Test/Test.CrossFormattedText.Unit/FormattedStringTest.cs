@@ -290,5 +290,18 @@ namespace Test.CrossFormattedText.Unit {
             Assert.AreEqual(newText1.Text,text.Subspan(1,3).Text);
             Assert.AreEqual(newText1.AnySpanReferenceEquals(text),false);
         }
+
+        [TestMethod]
+        public void PlusOperatorTest() {
+            FormattedString value = "aaa";
+
+            Assert.AreEqual((value + "ccc").Text,"aaaccc");
+            Assert.AreEqual(("ccc" + value).Text,"cccaaa");
+
+            Span a = new Span() { Text = "bbb" };
+
+            Assert.AreEqual((value + a).Text,"aaabbb");
+            Assert.AreEqual((a + value).Text,"bbbaaa");
+        }
     }
 }

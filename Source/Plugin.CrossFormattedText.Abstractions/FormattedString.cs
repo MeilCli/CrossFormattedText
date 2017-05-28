@@ -739,5 +739,17 @@ namespace Plugin.CrossFormattedText.Abstractions {
         public static explicit operator string(FormattedString text) {
             return text.Text;
         }
+
+        public static FormattedString operator+(FormattedString a,FormattedString b) {
+            return new FormattedString(a.spans.Concat(b.spans));
+        }
+
+        public static FormattedString operator+(FormattedString formattedString,Span span) {
+            return new FormattedString(formattedString.spans.Concat(Enumerable.Repeat(span,1)));
+        }
+
+        public static FormattedString operator+(Span span,FormattedString formattedString) {
+            return new FormattedString(Enumerable.Repeat(span,1).Concat(formattedString.spans));
+        }
     }
 }
