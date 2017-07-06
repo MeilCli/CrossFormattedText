@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="FontSizeTest.cs" />
     <Compile Include="FormattedStringBuilderTest.cs" />
+    <Compile Include="FormattedStringConverterTest.cs" />
     <Compile Include="FormattedStringTest.cs" />
     <Compile Include="SpanColorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
