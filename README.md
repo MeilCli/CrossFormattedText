@@ -39,22 +39,64 @@ Do destructive changes!!
   - muttable text(finish)
   - immutable span meta data(finish)
 
+## Document
+### Span
+Mutable text and mutable meta data
+
+### EditableSpan
+immutable text and mutable meta data
+
+### FormattedStringBuilder
+Alike StringBuilder, mutable text and immutable meta data.  
+If change meta data, build FormattedString to access EditableSpan 
+
+### FormattedString
+Alike string, immutable text and mutable meta data.  
+Two index type: text index or span index
+
+- text index operator
+  - string like operator
+- span index operator
+  - method name have suffix **Span
+  - EditableSpan indexer
+
+### FormattedStringConverter
+Alike html converter.  
+Not support Command, now.
+
+The following syntax:
+```
+<span font-size="{enum name or value} font="{enum name}" f-color="{value (format: a,r,g,b)} b-color="{value (format: a,r,g,b)}">text</span>
+```
+
+The following enum name:
+- font-size
+  - ultra-big
+  - big
+  - normal
+  - small
+  - ultra-small
+- font
+  - none
+  - bold
+  - italic
+  - italic-bold
+
 ## Usgae
 
 In PCL: prepare FormattedString
 ```csharp
-FormattedString HelloWorld = new FormattedString() {
-  Spans = new List<Span>() {
-    new Span() {
-      Text = "Hellow",
-      ForegroundColor = new SpanColor(125,125,125)
-    },
-    new Span() {
-      Text = "World",
-      FontAttributes = FontAttributes.Bold | FontAttributes.Italic
-    }
+FormattedString HelloWorld = new FormattedString(new Span[] {
+  new Span() {
+    Text = "Hello",
+    ForegroundColor = new SpanColor(125,125,125)
+  },
+  new Span() {
+    Text = "World",
+    FontAttributes = FontAttributes.Bold | FontAttributes.Italic,
+    FontSize = FontSize.Small
   }
-};
+});
 ```
 
 In PCL or target Platform: make ISpaanableString
