@@ -1,6 +1,8 @@
 # CrossFormattedText
 [![NuGet version](https://badge.fury.io/nu/Plugin.CrossFormattedText.svg)](https://www.nuget.org/packages/Plugin.CrossFormattedText/)  
       
+***version 2.0.0: Destructive changes!!***  
+**Document shortage, now**  
 This library rapped some platform span class
 - Android: SpannableStringBuilder(to ICharSequence
 - iOS: NSMutableAttributedString(to NSAttributedString
@@ -20,24 +22,6 @@ This library rapped some platform span class
 | Windows Phone 8.1| Yes | | ✓ | ✓ | ✓ | ✓ |
 | Windows 8.1| Yes | | ✓ | ✓ | ✓ | ✓ |
 | Mac | No | | | | | |
-
-## Working(Next Version)
-
-Do destructive changes!!
-
-*now document working*
-
-- change FormattedString(finish)
-  - string like operation(finish)
-  - string like span operation(finish)
-  - immutable text(finish)
-  - muttable span meta data(finish)
-  - encode/decode HTML like span text(beta finish)
-  - implicit/explicit cast(finish)
-- add FormattedStringBuilder(finish)
-  - StringBuilder like operation(finish)
-  - muttable text(finish)
-  - immutable span meta data(finish)
 
 ## Document
 ### Span
