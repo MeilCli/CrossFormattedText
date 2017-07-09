@@ -89,7 +89,6 @@
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewController.designer.cs">
@@ -100,14 +99,6 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Plugin.CrossFormattedText, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Plugin.CrossFormattedText.1.0.5\lib\Xamarin.iOS10\Plugin.CrossFormattedText.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Plugin.CrossFormattedText.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Plugin.CrossFormattedText.1.0.5\lib\Xamarin.iOS10\Plugin.CrossFormattedText.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -117,6 +108,16 @@
     <Content Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.Abstractions\Plugin.CrossFormattedText.Abstractions.csproj">
+      <Project>{6edb0588-ffc5-4ef5-8a99-9e241d0f878d}</Project>
+      <Name>Plugin.CrossFormattedText.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Plugin.CrossFormattedText.iOS\Plugin.CrossFormattedText.iOS.csproj">
+      <Project>{2882aeeb-d4cd-4eb9-8a6c-6653b33681f0}</Project>
+      <Name>Plugin.CrossFormattedText.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
     <ProjectReference Include="..\Sample.CrossFormattedText\Sample.CrossFormattedText.csproj">
       <Project>{78d097d1-7582-4490-a305-f7039f4e152d}</Project>
       <Name>Sample.CrossFormattedText</Name>
