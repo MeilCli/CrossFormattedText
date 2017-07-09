@@ -14,6 +14,11 @@ namespace Plugin.CrossFormattedText.Abstractions {
 
         private Span[] spans;
 
+        /// <summary>
+        /// Get EditableSpan at index
+        /// </summary>
+        /// <param name="index">index of spans</param>
+        /// <returns>EditableSpan at index</returns>
         public EditableSpan this[int index] {
             get {
                 if(index < 0 || index >= spans.Length) {
@@ -23,6 +28,9 @@ namespace Plugin.CrossFormattedText.Abstractions {
             }
         }
 
+        /// <summary>
+        /// The length of spans
+        /// </summary>
         public int Length => spans.Length;
 
         private string _text;

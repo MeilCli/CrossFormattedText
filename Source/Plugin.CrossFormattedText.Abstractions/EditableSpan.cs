@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace Plugin.CrossFormattedText.Abstractions {
 
+    /// <summary>
+    /// Editable meta data of span
+    /// </summary>
     public class EditableSpan {
 
         private Span span;
@@ -49,6 +52,9 @@ namespace Plugin.CrossFormattedText.Abstractions {
             }
         }
 
+        /// <summary>
+        /// If set to this, must set value to <see cref="CommandParameter"/>
+        /// </summary>
         public ICommand Command {
             get {
                 return span.Command;
