@@ -101,7 +101,7 @@ FormattedString HelloWorld = new FormattedString(new Span[] {
 
 In PCL or target Platform: make ISpaanableString
 ```csharp
-ISpannableString spannableString = CrossCrossFormattedText.Current.Format(HelloWorld);
+ISpannableString spannableString = HelloWorld.Build();
 ```
 
 In target Platform: put spanned string
