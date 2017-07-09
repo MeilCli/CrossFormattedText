@@ -24,7 +24,7 @@ namespace Sample.CrossFormattedText.WindowsStore {
         public MainPage() {
             this.InitializeComponent();
 
-            CrossCrossFormattedText.Current.Format(SpanText.HelloWorld).SetTo(TextBlock);
+            SpanText.HelloWorld.Build().SetTo(TextBlock);
         }
     }
 }

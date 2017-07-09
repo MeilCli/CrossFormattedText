@@ -29,7 +29,7 @@ namespace Sample.CrossFormattedText.WindowsPhone81
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
-            CrossCrossFormattedText.Current.Format(SpanText.HelloWorld).SetTo(TextBlock);
+            SpanText.HelloWorld.Build().SetTo(TextBlock);
         }
 
         /// <summary>

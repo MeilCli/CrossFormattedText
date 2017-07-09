@@ -17,7 +17,7 @@ namespace Sample.CrossFormattedText.WindowsPhone8 {
         public MainPage() {
             InitializeComponent();
 
-            CrossCrossFormattedText.Current.Format(SpanText.HelloWorld).SetTo(TextBlock);
+            SpanText.HelloWorld.Build().SetTo(TextBlock);
             // ApplicationBar をローカライズするためのサンプル コード
             //BuildLocalizedApplicationBar();
         }

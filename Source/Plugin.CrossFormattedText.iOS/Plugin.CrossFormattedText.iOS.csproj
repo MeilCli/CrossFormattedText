@@ -39,6 +39,7 @@
       <Link>CrossCrossFormattedText.cs</Link>
     </Compile>
     <Compile Include="CrossFormattedTextImplementation.cs" />
+    <Compile Include="FormattedStringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpannableString.cs" />
     <Compile Include="SpannableStringExtensions.cs" />

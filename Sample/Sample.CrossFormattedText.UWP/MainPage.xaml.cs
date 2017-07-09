@@ -26,7 +26,7 @@ namespace Sample.CrossFormattedText.UWP {
         public MainPage() {
             this.InitializeComponent();
 
-            var spannableString = CrossCrossFormattedText.Current.Format(SpanText.HelloWorld);
+            var spannableString = SpanText.HelloWorld.Build();
 
             spannableString.SetTo(TextBlock);
         }
